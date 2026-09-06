@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="دستگاه رست قهوه در کارگاه">
+  <defs>
+    <linearGradient id="rBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A2C1E"/>
+      <stop offset="1" stop-color="#17110B"/>
+    </linearGradient>
+    <linearGradient id="rSteel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8A6529"/>
+      <stop offset=".35" stop-color="#EBD6A6"/>
+      <stop offset=".65" stop-color="#C8963C"/>
+      <stop offset="1" stop-color="#7A5A24"/>
+    </linearGradient>
+    <linearGradient id="rDrum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5B4227"/>
+      <stop offset=".5" stop-color="#31220F"/>
+      <stop offset="1" stop-color="#1D1409"/>
+    </linearGradient>
+    <radialGradient id="fire" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FF9E3D" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#FF9E3D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#rBg)"/>
+  <g stroke="#0E0A06" stroke-opacity=".3" stroke-width="2">
+    <path d="M0 90h800M0 180h800M0 270h800"/>
+  </g>
+
+  <!-- دودکش -->
+  <rect x="238" y="0" width="34" height="120" fill="#6B4A2F"/>
+  <rect x="228" y="112" width="54" height="18" rx="6" fill="#8A6529"/>
+  <path d="M470 0v96h-64" stroke="#6B4A2F" stroke-width="20" fill="none" stroke-linecap="round"/>
+
+  <!-- قیف ورودی دانه -->
+  <path d="M186 128h146l-30 74h-86Z" fill="url(#rSteel)"/>
+  <rect x="180" y="120" width="158" height="16" rx="7" fill="#EBD6A6"/>
+  <g fill="#3A2510">
+    <ellipse cx="228" cy="150" rx="12" ry="9" transform="rotate(-18 228 150)"/>
+    <ellipse cx="262" cy="142" rx="12" ry="9" transform="rotate(12 262 142)"/>
+    <ellipse cx="292" cy="152" rx="12" ry="9" transform="rotate(-8 292 152)"/>
+    <ellipse cx="246" cy="170" rx="12" ry="9" transform="rotate(24 246 170)"/>
+  </g>
+
+  <!-- بدنهٔ رستر -->
+  <rect x="146" y="200" width="330" height="200" rx="26" fill="url(#rDrum)" stroke="#C8963C" stroke-width="4" stroke-opacity=".55"/>
+  <!-- دریچهٔ دیدن -->
+  <circle cx="256" cy="300" r="72" fill="#12100A" stroke="url(#rSteel)" stroke-width="12"/>
+  <circle cx="256" cy="300" r="56" fill="#2A1B0C"/>
+  <ellipse cx="256" cy="300" rx="60" ry="58" fill="url(#fire)"/>
+  <g fill="#7A4E22">
+    <ellipse cx="232" cy="292" rx="13" ry="10" transform="rotate(-20 232 292)"/>
+    <ellipse cx="268" cy="282" rx="13" ry="10" transform="rotate(15 268 282)"/>
+    <ellipse cx="284" cy="312" rx="13" ry="10" transform="rotate(-5 284 312)"/>
+    <ellipse cx="244" cy="322" rx="13" ry="10" transform="rotate(30 244 322)"/>
+    <ellipse cx="212" cy="316" rx="13" ry="10" transform="rotate(8 212 316)"/>
+  </g>
+  <circle cx="236" cy="278" r="18" fill="#FFE7B8" opacity=".18"/>
+
+  <!-- پنل کنترل -->
+  <rect x="356" y="238" width="98" height="126" rx="10" fill="#12100A" stroke="#C8963C" stroke-width="2" stroke-opacity=".5"/>
+  <g>
+    <circle cx="384" cy="270" r="13" fill="#B23A2B"/>
+    <circle cx="424" cy="270" r="13" fill="#A9B78C"/>
+    <rect x="370" y="298" width="70" height="10" rx="5" fill="#C8963C" opacity=".7"/>
+    <rect x="370" y="318" width="48" height="10" rx="5" fill="#C8963C" opacity=".4"/>
+    <rect x="370" y="338" width="60" height="10" rx="5" fill="#C8963C" opacity=".25"/>
+  </g>
+
+  <!-- شعله زیر درام -->
+  <ellipse cx="290" cy="418" rx="120" ry="26" fill="url(#fire)" opacity=".55"/>
+  <g fill="#FF9E3D" opacity=".85">
+    <path d="M228 416c0-14 10-18 8-30 12 8 14 20 10 30Z"/>
+    <path d="M276 418c0-16 12-22 9-34 14 10 16 24 11 34Z"/>
+    <path d="M328 416c0-13 9-17 7-28 11 8 13 19 9 28Z"/>
+  </g>
+
+  <!-- سینی خنک‌کننده -->
+  <ellipse cx="596" cy="378" rx="140" ry="52" fill="#31220F" stroke="url(#rSteel)" stroke-width="10"/>
+  <ellipse cx="596" cy="372" rx="120" ry="42" fill="#4A3018"/>
+  <g fill="#8A5A2C">
+    <ellipse cx="546" cy="362" rx="14" ry="10" transform="rotate(-16 546 362)"/>
+    <ellipse cx="586" cy="352" rx="14" ry="10" transform="rotate(10 586 352)"/>
+    <ellipse cx="626" cy="366" rx="14" ry="10" transform="rotate(-6 626 366)"/>
+    <ellipse cx="566" cy="386" rx="14" ry="10" transform="rotate(22 566 386)"/>
+    <ellipse cx="612" cy="390" rx="14" ry="10" transform="rotate(-24 612 390)"/>
+    <ellipse cx="652" cy="380" rx="14" ry="10" transform="rotate(4 652 380)"/>
+  </g>
+  <path d="M596 330v-26" stroke="url(#rSteel)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M540 306h112" stroke="url(#rSteel)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- پایه -->
+  <g stroke="#6B4A2F" stroke-width="16" stroke-linecap="round">
+    <path d="M186 400v92M436 400v92M556 424v70M636 424v70"/>
+  </g>
+  <rect y="490" width="800" height="18" fill="#6B4A2F" opacity=".7"/>
+
+  <!-- گونی‌های دانه -->
+  <g transform="translate(90 500)">
+    <path d="M-52 92c-6-44 4-72 12-86-8-8-4-16 6-14 6-8 22-10 30-2 12-4 22 4 18 14 10 12 20 42 14 88Z" fill="#C9A87C"/>
+    <path d="M-46 60h74" stroke="#A98757" stroke-width="6"/>
+    <ellipse cx="-8" cy="78" rx="16" ry="12" fill="#8A5A2C" opacity=".5"/>
+  </g>
+  <g transform="translate(706 508)">
+    <path d="M-46 84c-5-40 4-66 11-78-8-8-4-15 5-13 6-8 20-9 28-2 11-4 20 4 16 13 9 11 18 38 13 80Z" fill="#A9B78C"/>
+    <path d="M-40 56h66" stroke="#87996B" stroke-width="6"/>
+  </g>
+
+  <!-- بخار -->
+  <g stroke="#FFE7B8" stroke-opacity=".22" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M255 108c-12-16 12-26 0-44s10-26 2-40"/>
+    <path d="M478 84c-11-14 11-24 0-40s9-24 2-36"/>
+  </g>
+</svg>

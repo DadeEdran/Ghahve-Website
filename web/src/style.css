@@ -1,0 +1,3299 @@
+/* ══════════════════════════════════════════════════
+   رُست‌خانهٔ دانه — استایل‌نامه
+   پالت از خودِ قهوه گرفته شده:
+   دانهٔ خام سبز، پوستهٔ گیلاس قرمز، دانهٔ رست‌شدهٔ تیره،
+   شیر و کاراملِ فنجان.
+   ══════════════════════════════════════════════════ */
+
+/* ── نام فونت‌ها از راه متغیر می‌آید، نه با اسم ──
+   فونت‌ها با next/font روی همین دامنه میزبانی می‌شوند
+   (مورد ۲۵) و نامِ خانواده‌ای که تولید می‌شود قطعی نیست.
+   پس هیچ‌جای این فایل `'Vazirmatn'` یا `'Lalezar'` را
+   مستقیم نمی‌نویسد:
+
+     font-family: var(--font-vazirmatn), …
+     font-family: var(--font-lalezar), …
+
+   متغیرها را app/layout.jsx روی <html> می‌گذارد. اگر
+   روزی آن دو کلاس از <html> برداشته شوند، همهٔ متن سایت
+   به فونت جانشین می‌افتد — بی هیچ خطایی. */
+
+/* جدول توکن‌های طراحی: ستون رنگ‌ها عمداً هم‌تراز است */
+/* prettier-ignore */
+:root{
+  --paper:        #f6efe3;   /* کاغذ کاهیِ گرم */
+  --paper-2:      #efe4d2;
+  --paper-3:      #fbf6ea;
+  --line:         #dccdb4;
+
+  --espresso:     #1e1710;   /* دانهٔ رست تیره */
+  --espresso-2:   #2e241a;
+
+  /* متن فرعی — کمی تیره‌تر از پالت اولیه، چون رنگ قبلی روی
+     زمینهٔ کاهی به‌سختی خوانده می‌شد. */
+  --soft:         #6b5b45;
+  --ink-2:        #4a3e2e;   /* متن معرفی روی زمینهٔ روشن */
+
+  --sage:         #a9b78c;   /* دانهٔ خام */
+  --sage-deep:    #5c6b47;   /* تیره‌تر شد تا «تیتر کوچک» خوانا باشد */
+  --cherry:       #b23a2b;   /* گیلاس قهوه */
+  --cherry-dark:  #8e2a1e;
+  --brass:        #c8963c;   /* برنجِ ترازو */
+  --latte:        #c9a87c;   /* شیر و قهوه */
+  --crema:        #e8cba0;
+
+  --radius:   16px;
+  --radius-s: 10px;
+  --shadow:   0 18px 40px -28px rgba(30,23,16,.5);
+  --shadow-lift: 0 26px 50px -30px rgba(30,23,16,.62);
+  --wrap:     1200px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* صفت hidden باید همیشه برنده باشد؛ وگرنه display دلخواه کلاس‌ها آن را بی‌اثر می‌کند */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--espresso);
+  font-family: var(--font-vazirmatn), system-ui, 'Segoe UI', Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* بافت ریزِ کاغذ روی کل صفحه — حس چاپ و کافه */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-lalezar), var(--font-vazirmatn), sans-serif;
+  font-weight: 400;
+  line-height: 1.28;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+p {
+  margin: 0 0 1rem;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img,
+svg {
+  max-width: 100%;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cherry);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: min(var(--wrap), 92%);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: -100px;
+  inset-inline-start: 16px;
+  z-index: 100;
+  background: var(--espresso);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 0 0 10px 10px;
+}
+.skip-link:focus {
+  inset-block-start: 0;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--sage-deep);
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+}
+
+/* ─── دکمه‌ها ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.72em 1.5em;
+  border-radius: 100px;
+  border: 1.5px solid transparent;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 0.18s var(--ease),
+    background-color 0.18s,
+    color 0.18s,
+    border-color 0.18s,
+    box-shadow 0.18s;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  background: var(--cherry);
+  color: #fff6f2;
+  box-shadow: 0 10px 22px -14px rgba(178, 58, 43, 0.9);
+}
+.btn-primary:hover {
+  background: var(--cherry-dark);
+}
+.btn-ghost {
+  border-color: currentColor;
+  color: var(--espresso);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: var(--espresso);
+  color: var(--paper);
+  border-color: var(--espresso);
+}
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* ─── هدر ─── */
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 40;
+  background: rgba(246, 239, 227, 0.88);
+  backdrop-filter: blur(12px);
+  border-block-end: 1px solid var(--line);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 74px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  color: var(--cherry);
+  flex: none;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.22rem;
+  line-height: 1.1;
+}
+.logo-text em {
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-style: normal;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--soft);
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  margin-inline-start: auto;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.nav a {
+  position: relative;
+  padding-block: 4px;
+}
+.nav a::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  width: 0;
+  height: 2px;
+  background: var(--cherry);
+  transition: width 0.25s var(--ease);
+}
+.nav a:hover::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* دکمهٔ پیگیری، همان قالبِ سبد ولی تخت — تا در کنارش
+   دیده شود و از آن جلو نزند. سبد کارِ اصلیِ هدر است. */
+.btn-track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  color: var(--espresso);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 0.5em 1.05em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+.btn-track:hover {
+  background: rgba(58, 42, 32, 0.06);
+  border-color: var(--espresso);
+}
+.btn-track .icon {
+  width: 19px;
+  height: 19px;
+  flex: none;
+}
+
+.btn-cart {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--espresso);
+  color: var(--paper);
+  border: none;
+  border-radius: 100px;
+  padding: 0.55em 1.1em;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+.btn-cart:hover {
+  background: var(--espresso-2);
+}
+.btn-cart .icon {
+  width: 19px;
+  height: 19px;
+}
+.btn-cart b {
+  background: var(--brass);
+  color: var(--espresso);
+  border-radius: 100px;
+  padding: 0.1em 0.7em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.btn-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.btn-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--espresso);
+  margin: 5px 0;
+  transition:
+    transform 0.25s var(--ease),
+    opacity 0.2s;
+}
+.btn-burger[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.btn-burger[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+.btn-burger[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── هیرو ─── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--espresso);
+  color: var(--paper);
+  padding-block: clamp(60px, 7vw, 104px) clamp(66px, 8vw, 116px);
+}
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% center;
+  max-width: none;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      to left,
+      rgba(24, 18, 12, 0.95) 0%,
+      rgba(24, 18, 12, 0.88) 34%,
+      rgba(24, 18, 12, 0.62) 66%,
+      rgba(24, 18, 12, 0.5) 100%
+    ),
+    linear-gradient(to top, rgba(24, 18, 12, 0.85), rgba(24, 18, 12, 0) 55%);
+}
+.roast-curve {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  width: 100%;
+  height: 55%;
+  color: var(--brass);
+  opacity: 0.3;
+  pointer-events: none;
+}
+.roast-curve #curveLine {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 2.4s var(--ease) 0.3s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-inner {
+  position: relative;
+  display: grid;
+  gap: clamp(34px, 5vw, 64px);
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+}
+.hero-copy .eyebrow {
+  color: var(--crema);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5.6vw, 4.4rem);
+  margin-block-end: 1rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+.hero h1 .hl {
+  color: var(--brass);
+}
+/* «lead» هم روی زمینهٔ روشن به کار می‌رود هم روی تیره.
+   حالت پایه برای زمینهٔ روشن است؛ بخش‌های تیره (تصویر اصلی
+   و نوارهای قهوه‌ای) رنگ روشن خودشان را می‌گیرند — وگرنه
+   متن روی زمینهٔ کاهی تقریباً ناپیدا می‌شد. */
+.lead {
+  color: var(--ink-2);
+  max-width: 52ch;
+  font-size: 1.03rem;
+}
+.hero .lead {
+  color: #e4e2d8;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 1.6rem 2.2rem;
+}
+.hero .btn-ghost {
+  color: var(--paper);
+}
+.hero .btn-ghost:hover {
+  background: var(--paper);
+  color: var(--espresso);
+  border-color: var(--paper);
+}
+
+.hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-block-start: 1px solid rgba(239, 239, 230, 0.18);
+  padding-block-start: 20px;
+}
+.hero-facts li {
+  display: flex;
+  flex-direction: column;
+}
+.hero-facts b {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.5rem;
+  color: var(--crema);
+  line-height: 1.2;
+}
+.hero-facts span {
+  font-size: 0.78rem;
+  color: #b6b3a6;
+}
+
+/* ─── ترازوی قیمت (امضای صفحه) ─── */
+.scale {
+  background: linear-gradient(170deg, #fcf7ec, #e7dac2);
+  color: var(--espresso);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 34px 66px -30px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.scale-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: 16px;
+}
+.scale-title {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.15rem;
+}
+.scale-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sage-deep);
+  box-shadow: 0 0 0 4px rgba(110, 127, 87, 0.2);
+  animation: pulse 2.6s infinite;
+}
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(110, 127, 87, 0);
+  }
+}
+
+.field {
+  display: block;
+  margin-block-end: 14px;
+}
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin-block-end: 6px;
+}
+.select,
+.input {
+  width: 100%;
+  padding: 0.65em 0.9em;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper-3);
+  transition: border-color 0.2s;
+}
+.select:hover,
+.input:hover {
+  border-color: var(--sage-deep);
+}
+
+.readout {
+  background: var(--espresso);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  text-align: center;
+  margin-block-end: 18px;
+  box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+.readout-weight {
+  font-size: 0.9rem;
+  color: var(--crema);
+  letter-spacing: 0.06em;
+}
+.readout-price {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: clamp(2rem, 4.4vw, 2.9rem);
+  line-height: 1.2;
+  color: var(--brass);
+}
+.readout-price em {
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: #cfccc1;
+  margin-inline-start: 8px;
+}
+.readout-unit {
+  font-size: 0.75rem;
+  color: #a9a597;
+}
+
+/* اسلایدر وزن */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--crema), var(--espresso));
+  cursor: pointer;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--brass);
+  border: 3px solid var(--paper-3);
+  cursor: grab;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brass);
+  border: 3px solid var(--paper-3);
+  cursor: grab;
+}
+.range-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--soft);
+  margin-block: 6px 16px;
+}
+
+.scale-note {
+  font-size: 0.72rem;
+  color: var(--soft);
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+/* ─── نوار اطمینان ─── */
+.strip {
+  background: var(--espresso-2);
+  color: var(--paper);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+.strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 34px;
+  justify-content: space-between;
+  padding-block: 14px;
+  font-size: 0.84rem;
+  color: #d9d3c6;
+}
+.strip-inner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.strip-inner svg {
+  width: 19px;
+  height: 19px;
+  color: var(--crema);
+  flex: none;
+}
+
+/* ─── بخش‌ها ─── */
+.section {
+  padding-block: clamp(58px, 7.5vw, 104px);
+}
+.section.soft {
+  background: var(--paper-2);
+}
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-block-end: 28px;
+}
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+}
+.section-desc {
+  color: var(--soft);
+  max-width: 42ch;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.band {
+  background: var(--espresso);
+  color: var(--paper);
+}
+.band .eyebrow {
+  color: var(--crema);
+}
+.band .lead {
+  color: #d5d3c8;
+}
+/* توضیح بخش روی نوار تیره هم باید روشن باشد؛ رنگ پیش‌فرضش
+   قهوه‌ای تیره است و روی این زمینه خوانده نمی‌شود. */
+.band .section-desc {
+  color: #d5d3c8;
+}
+
+/* ─── نوار ابزار فهرست ─── */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: 32px;
+  padding-block-end: 18px;
+  border-block-end: 1px dashed var(--line);
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.chip {
+  background: transparent;
+  border: 1.5px solid var(--line);
+  color: var(--soft);
+  border-radius: 100px;
+  padding: 0.42em 1.05em;
+  cursor: pointer;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s var(--ease);
+}
+.chip b {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--paper-2);
+  color: var(--soft);
+  border-radius: 100px;
+  padding: 0 0.5em;
+}
+.chip:hover {
+  border-color: var(--espresso);
+  color: var(--espresso);
+}
+.chip.is-active {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  color: var(--paper);
+}
+.chip.is-active b {
+  background: var(--brass);
+  color: var(--espresso);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper-3);
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  padding: 0.3em 0.95em;
+  transition: border-color 0.2s;
+}
+.search:focus-within {
+  border-color: var(--sage-deep);
+}
+.search svg {
+  width: 17px;
+  height: 17px;
+  color: var(--soft);
+  flex: none;
+}
+.search input {
+  border: none;
+  background: none;
+  outline: none;
+  width: min(220px, 42vw);
+  font-size: 0.88rem;
+  padding-block: 0.3em;
+}
+.search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.sortbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+.sortbox .select {
+  width: auto;
+  border-radius: 100px;
+  padding: 0.4em 1em;
+  font-size: 0.86rem;
+}
+
+.result-count {
+  font-size: 0.8rem;
+  color: var(--soft);
+  background: var(--paper-2);
+  border-radius: 100px;
+  padding: 0.3em 0.9em;
+}
+
+/* ─── شبکهٔ محصولات ─── */
+#grid,
+#gearGrid,
+#powderGrid {
+  display: grid;
+  gap: clamp(34px, 5vw, 56px);
+}
+.grid-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  gap: 22px;
+}
+
+.cat-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+  margin-block-end: 16px;
+}
+.cat-head h3 {
+  font-size: 1.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline-end: 16px;
+  border-inline-end: 2px solid var(--line);
+}
+.cat-head h3 span {
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: var(--espresso);
+  color: var(--crema);
+  border-radius: 100px;
+  padding: 0.1em 0.8em;
+}
+.cat-head p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--soft);
+}
+
+/* ─── کارت محصول ─── */
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease),
+    border-color 0.2s,
+    box-shadow 0.3s;
+}
+.card.is-in {
+  opacity: 1;
+  transform: none;
+}
+.card:hover {
+  border-color: var(--sage-deep);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px);
+}
+
+/* تصویر دانهٔ هر قهوه */
+.card-media {
+  position: relative;
+}
+.card-art {
+  display: block;
+  width: 100%;
+  height: 152px;
+}
+.card-media::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: 34px;
+  background: linear-gradient(to top, var(--paper-3), transparent);
+  pointer-events: none;
+}
+.card-chip {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
+  z-index: 2;
+  background: rgba(30, 23, 16, 0.72);
+  color: var(--paper);
+  backdrop-filter: blur(4px);
+  font-size: 0.68rem;
+  font-weight: 500;
+  border-radius: 100px;
+  padding: 0.2em 0.8em;
+}
+.card-media .badge {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  z-index: 2;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px 20px 20px;
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.card-origin {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--sage-deep);
+  margin: 0;
+}
+.card h3 {
+  font-size: 1.4rem;
+  margin-block: 2px 6px;
+}
+
+/* ── نام کالا، لینکِ صفحهٔ اختصاصی‌اش (مورد ۲۷) ──
+   عمداً شبیه متن معمولی می‌ماند و نه شبیه لینک آبیِ زیرخط‌دار:
+   کارت شلوغ است و یک لینکِ پررنگ وسطش، چشم را از دکمهٔ «افزودن»
+   می‌دزدد. با هوور و فوکوس خودش را نشان می‌دهد. */
+.card h3 a.card-title-link {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.card h3 a.card-title-link:hover {
+  color: var(--cherry);
+  text-decoration: underline;
+}
+/* کاربر صفحه‌کلید باید ببیند کجاست — اینجا برخلاف هوور،
+   حلقهٔ فوکوس پیش‌فرض مرورگر کافی نیست چون لینک تا لبهٔ کارت
+   کشیده می‌شود. */
+.card h3 a.card-title-link:focus-visible {
+  outline: 2px solid var(--cherry);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.card-process {
+  font-size: 0.8rem;
+  color: var(--soft);
+  margin: 0;
+}
+
+.badge {
+  flex: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25em 0.75em;
+  border-radius: 100px;
+  background: var(--cherry);
+  color: #fff3ef;
+  box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.8);
+}
+
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+}
+.notes li {
+  font-size: 0.74rem;
+  background: var(--paper-2);
+  border-radius: 100px;
+  padding: 0.22em 0.7em;
+  color: var(--espresso-2);
+}
+
+.roast-meter {
+  margin-block: 6px 16px;
+}
+.roast-meter span {
+  font-size: 0.72rem;
+  color: var(--soft);
+}
+.roast-bar {
+  display: flex;
+  gap: 4px;
+  margin-block-start: 6px;
+}
+.roast-bar i {
+  height: 7px;
+  flex: 1;
+  border-radius: 100px;
+  background: var(--paper-2);
+}
+.roast-bar i.on {
+  background: linear-gradient(90deg, var(--latte), var(--espresso));
+}
+
+.weights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-block-end: 12px;
+}
+.weight-btn {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 0.5em 0.2em;
+  cursor: pointer;
+  font-size: 0.82rem;
+  text-align: center;
+  transition: all 0.18s var(--ease);
+}
+.weight-btn:hover {
+  border-color: var(--sage-deep);
+}
+.weight-btn.is-active {
+  background: var(--espresso);
+  color: var(--paper);
+  border-color: var(--espresso);
+}
+/* وزنی که به اندازهٔ کافی موجود نیست */
+.weight-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+.weight-btn:disabled:hover {
+  border-color: var(--line);
+}
+
+/* ── وضعیت انبار ──
+   کارتِ ناموجود کم‌رنگ می‌شود ولی خوانا می‌ماند: مشتری
+   باید ببیند چه چیزی را از دست داده تا دوباره سر بزند. */
+.card.is-soldout .card-media {
+  filter: grayscale(0.65);
+}
+.badge-out {
+  background: var(--espresso);
+  color: var(--paper);
+}
+.stock-note {
+  font-size: 0.76rem;
+  margin: 0 0 12px;
+}
+.stock-note.is-low {
+  color: var(--cherry);
+}
+.stock-note.is-out {
+  color: var(--soft);
+}
+.card-foot .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+.card-foot {
+  margin-block-start: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block-start: 12px;
+  border-block-start: 1px dashed var(--line);
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.price b {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.35rem;
+}
+.price small {
+  font-size: 0.7rem;
+  color: var(--soft);
+}
+
+.empty {
+  text-align: center;
+  color: var(--soft);
+  padding-block: 40px;
+}
+
+/* ─── کارت ابزار دم‌آوری ─── */
+/* همان کارت قهوه است؛ فقط سنجهٔ رست جای خود را به «سطح مهارت»
+   و دکمه‌های وزن جای خود را به «سازگار با» می‌دهد. */
+.card-gear .card-art {
+  height: 158px;
+}
+.card-gear .card-origin {
+  color: var(--soft);
+}
+.card-gear:hover {
+  border-color: var(--brass);
+}
+
+.level-bar i.on {
+  background: linear-gradient(90deg, var(--sage), var(--sage-deep));
+}
+
+.compat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+.compat li {
+  font-size: 0.72rem;
+  color: var(--soft);
+  border: 1px dashed var(--line);
+  border-radius: 100px;
+  padding: 0.18em 0.7em;
+}
+.compat .compat-key {
+  border: none;
+  padding: 0;
+  color: var(--sage-deep);
+  font-weight: 500;
+  margin-inline-end: 2px;
+}
+
+/* ─── کارت پودر ─── */
+/* مثل کارت قهوه به گرم فروخته می‌شود؛ «درجهٔ رست» جایش را به «شدت طعم» داده. */
+.card-powder .card-art {
+  height: 158px;
+}
+.card-powder:hover {
+  border-color: var(--cherry);
+}
+.card-powder .compat {
+  margin-block-end: 10px;
+}
+.taste-bar i.on {
+  background: linear-gradient(90deg, var(--crema), var(--cherry));
+}
+
+/* ─── روش‌های دم‌آوری ─── */
+.brew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.brew-card {
+  text-align: start;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition:
+    transform 0.22s var(--ease),
+    border-color 0.2s,
+    box-shadow 0.3s;
+}
+.brew-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sage-deep);
+  box-shadow: var(--shadow-lift);
+}
+.brew-card img {
+  width: 110px;
+  height: 110px;
+  align-self: center;
+  margin-block-end: 6px;
+}
+.brew-card h3 {
+  font-size: 1.3rem;
+}
+.brew-card p {
+  font-size: 0.88rem;
+  color: var(--soft);
+  margin: 0 0 6px;
+}
+.brew-tag {
+  font-size: 0.74rem;
+  color: var(--sage-deep);
+  background: rgba(169, 183, 140, 0.25);
+  border-radius: 100px;
+  padding: 0.24em 0.8em;
+  align-self: flex-start;
+  margin-block-start: auto;
+}
+
+/* ─── داستان کارگاه ─── */
+.story-inner {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(28px, 5vw, 60px);
+  align-items: center;
+}
+.story-photo {
+  margin: 0;
+  position: relative;
+}
+.story-photo img {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid rgba(200, 150, 60, 0.35);
+  box-shadow: 0 34px 60px -34px rgba(0, 0, 0, 0.9);
+}
+.story-photo figcaption {
+  position: absolute;
+  inset-block-end: 14px;
+  inset-inline-start: 14px;
+  background: rgba(20, 15, 10, 0.78);
+  backdrop-filter: blur(6px);
+  color: var(--crema);
+  font-size: 0.76rem;
+  border-radius: 100px;
+  padding: 0.35em 1em;
+}
+.story-inner .btn {
+  margin-block-start: 0.6rem;
+}
+
+.check {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem;
+  display: grid;
+  gap: 10px;
+}
+.check li {
+  position: relative;
+  padding-inline-start: 26px;
+  color: var(--soft);
+  font-size: 0.95rem;
+}
+.band .check li {
+  color: #d5d3c8;
+}
+.check li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.62em;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--sage);
+}
+
+/* ─── خرید کیلویی ─── */
+.bulk-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 60px);
+  align-items: center;
+}
+.bulk-inner h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  margin-block-end: 0.7rem;
+}
+.bulk-inner .lead {
+  color: var(--soft);
+}
+
+.bulk-side {
+  display: grid;
+  gap: 18px;
+}
+.bulk-photo {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.tiers {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tiers caption {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1rem;
+  color: var(--cherry);
+  padding-block-end: 10px;
+  text-align: start;
+}
+.tiers th,
+.tiers td {
+  padding: 0.8em 1.1em;
+  text-align: start;
+  border-block-end: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.tiers th {
+  color: var(--sage-deep);
+  font-weight: 500;
+  background: var(--paper-2);
+}
+.tiers tbody tr:last-child td {
+  border-block-end: none;
+  color: var(--cherry);
+  font-weight: 700;
+}
+
+/* ─── راهنمای رست ─── */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+.guide-card {
+  text-align: start;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition:
+    transform 0.22s var(--ease),
+    border-color 0.2s,
+    box-shadow 0.3s;
+}
+.guide-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sage-deep);
+  box-shadow: var(--shadow-lift);
+}
+.guide-card h3 {
+  font-size: 1.35rem;
+  margin-block: 12px 6px;
+}
+.guide-card p {
+  font-size: 0.9rem;
+  color: var(--soft);
+  margin-block-end: 12px;
+}
+.guide-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cherry);
+}
+.roast-swatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+.roast-swatch svg {
+  width: 44px;
+  height: 32px;
+}
+.roast-swatch[data-level='1'] {
+  background: #f5e9d2;
+}
+.roast-swatch[data-level='3'] {
+  background: #ebdcc2;
+}
+.roast-swatch[data-level='5'] {
+  background: #dfd1b8;
+}
+.roast-swatch[data-level='d'] {
+  background: #e7eeda;
+}
+
+/* ─── گالری کافه ─── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 195px;
+  gap: 16px;
+}
+.shot {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+  grid-column: span 2;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.shot-wide {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.shot figcaption {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  padding: 26px 16px 12px;
+  font-size: 0.82rem;
+  color: #f7f1e4;
+  background: linear-gradient(to top, rgba(20, 15, 10, 0.85), rgba(20, 15, 10, 0));
+}
+.shot:hover img {
+  transform: scale(1.05);
+}
+
+/* بزرگ‌نمایی */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 15, 10, 0.88);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.26s;
+  cursor: zoom-out;
+  padding: 5vw;
+}
+.lightbox.is-open {
+  opacity: 1;
+}
+.lightbox figure {
+  margin: 0;
+  text-align: center;
+}
+.lightbox img {
+  max-height: 78vh;
+  border-radius: var(--radius);
+  box-shadow: 0 40px 80px -30px #000;
+}
+.lightbox figcaption {
+  color: var(--crema);
+  font-size: 0.9rem;
+  margin-block-start: 14px;
+}
+
+/* ─── فوتر ─── */
+.footer {
+  background: var(--espresso);
+  color: var(--paper);
+  padding-block: 56px 22px;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr 1fr;
+  gap: 34px;
+}
+.footer h4 {
+  font-size: 1.1rem;
+  margin-block-end: 10px;
+  color: var(--crema);
+}
+.footer p {
+  font-size: 0.88rem;
+  color: #b6b0a2;
+  margin-block-end: 0.5rem;
+}
+.footer-brand .logo-text {
+  font-size: 1.3rem;
+  margin-block-end: 12px;
+}
+.footer-brand .logo-text em {
+  color: var(--brass);
+}
+.footer a:hover {
+  color: var(--brass);
+}
+.nl-row {
+  display: flex;
+  gap: 8px;
+}
+.nl-row .input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--paper);
+}
+.nl-row .input::placeholder {
+  color: #8f887a;
+}
+.nl-msg {
+  font-size: 0.8rem;
+  color: var(--sage);
+  min-height: 1.2em;
+  margin-block-start: 8px;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+  margin-block-start: 34px;
+  padding-block-start: 18px;
+  font-size: 0.78rem;
+  color: #8f887a;
+}
+
+/* ─── سبد خرید ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 23, 16, 0.5);
+  z-index: 60;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.overlay.is-open {
+  opacity: 1;
+}
+
+.drawer {
+  position: fixed;
+  inset-block: 0;
+  left: 0;
+  width: min(430px, 92vw);
+  z-index: 70;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.35);
+}
+.drawer.is-open {
+  transform: none;
+}
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-block-end: 1px solid var(--line);
+}
+.drawer-head h2 {
+  font-size: 1.5rem;
+}
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--soft);
+}
+.btn-close:hover {
+  color: var(--cherry);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 22px;
+}
+.cart-empty {
+  text-align: center;
+  color: var(--soft);
+  padding-block: 60px;
+  font-size: 0.92rem;
+}
+
+.cart-item {
+  display: grid;
+  gap: 8px;
+  padding-block: 16px;
+  border-block-end: 1px dashed var(--line);
+}
+.cart-item-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.cart-thumb {
+  flex: none;
+  width: 62px;
+  height: 48px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.cart-thumb .card-art {
+  height: 100%;
+}
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.cart-item h3 {
+  font-size: 1.05rem;
+}
+.cart-item .unit {
+  font-size: 0.72rem;
+  color: var(--soft);
+}
+.cart-item .line-price {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.qty button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--paper-3);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: all 0.18s;
+}
+.qty button:hover {
+  border-color: var(--espresso);
+  background: var(--espresso);
+  color: var(--paper);
+}
+.qty output {
+  font-size: 0.9rem;
+  min-width: 88px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* دکمهٔ «حذف» هم داخل .qty است، ولی گرد و ۳۰در۳۰ نیست —
+   وگرنه متنش از دایره بیرون می‌زند. گزینش این قاعده باید از
+   ‎.qty button قوی‌تر باشد تا اندازهٔ ثابت را پس بزند. */
+.qty .remove {
+  width: auto;
+  height: auto;
+  flex: none;
+  border-radius: 100px;
+  padding: 0.3em 0.8em;
+  background: none;
+  border: 1.5px solid transparent;
+  color: var(--soft);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-inline-start: auto;
+}
+.qty .remove:hover {
+  color: var(--cherry);
+  border-color: rgba(178, 58, 43, 0.35);
+  background: rgba(178, 58, 43, 0.08);
+  text-decoration: none;
+}
+
+.drawer-foot {
+  border-block-start: 1px solid var(--line);
+  padding: 18px 22px;
+  background: var(--paper-2);
+}
+.totals {
+  margin: 12px 0;
+  display: grid;
+  gap: 7px;
+}
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+.totals dt,
+.totals dd {
+  margin: 0;
+}
+.totals dd {
+  font-weight: 700;
+}
+.row-discount dd {
+  color: var(--sage-deep);
+}
+.row-total {
+  border-block-start: 1px solid var(--line);
+  padding-block-start: 9px;
+  margin-block-start: 4px;
+}
+.row-total dt {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.15rem;
+}
+.row-total dd {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.3rem;
+  color: var(--cherry);
+}
+.next-tier {
+  font-size: 0.78rem;
+  color: var(--sage-deep);
+  background: rgba(169, 183, 140, 0.22);
+  border-radius: var(--radius-s);
+  padding: 0.6em 0.8em;
+  margin-block-end: 12px;
+}
+
+/* ─── توست ─── */
+.toast {
+  position: fixed;
+  inset-block-end: 26px;
+  inset-inline-start: 50%;
+  transform: translate(50%, 20px);
+  background: var(--espresso);
+  color: var(--paper);
+  padding: 0.8em 1.4em;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  z-index: 98;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s,
+    transform 0.3s var(--ease);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.6);
+}
+.toast.is-on {
+  opacity: 1;
+  transform: translate(50%, 0);
+}
+
+/* ══════════════════════════════════════════════════
+   بخش‌های تازه
+   ══════════════════════════════════════════════════ */
+
+/* ─── روی کارت کالا ─── */
+
+.taste-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+.taste-tags li {
+  font-size: 0.7rem;
+  padding: 0.16em 0.68em;
+  border-radius: 100px;
+  background: rgba(110, 127, 87, 0.14);
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+
+/* ── دکمهٔ هم‌رسانی ──
+   شکلش از همان چیزهایی می‌آید که کارت دارد: گِردیِ
+   ۱۰۰px دکمه‌ها، رنگ گیلاسیِ .card-more، و خطوطِ
+   ۱.۷ پیکسلیِ آیکن‌های سایت. چیز تازه‌ای نیست، فقط
+   بی‌متن است چون کنار عنوان می‌نشیند. */
+.share-btn {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 34px;
+  block-size: 34px;
+  padding: 0;
+  border-radius: 100px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: var(--soft);
+  cursor: pointer;
+  transition:
+    color 0.18s,
+    border-color 0.18s,
+    background-color 0.18s;
+}
+.share-btn svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+.share-btn:hover,
+.share-btn:focus-visible {
+  color: var(--cherry);
+  border-color: var(--cherry);
+  background: rgba(178, 58, 43, 0.07);
+}
+.share-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+/* کارت جا تنگ دارد: دکمه در ردیف عنوان می‌نشیند و کمی
+   بالاتر می‌آید تا هم‌تراز خطِ «خاستگاه» باشد. */
+.card-share {
+  margin-block-start: -4px;
+  margin-inline-end: -6px;
+}
+
+.card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-block-end: 12px;
+  color: var(--cherry);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-block-end: 1px dashed currentColor;
+}
+.card-more:hover {
+  color: var(--cherry-dark);
+}
+.card-more svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.card-grind {
+  display: block;
+  margin-block-end: 12px;
+}
+.card-grind .field-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--soft);
+  margin-block-end: 5px;
+}
+.card-grind .select {
+  padding: 0.5em 0.8em;
+  font-size: 0.85rem;
+}
+
+/* ─── پنجرهٔ «دربارهٔ این قهوه» ─── */
+
+.sheet-back {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(20, 15, 10, 0.62);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: sheetIn 0.22s var(--ease);
+}
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sheet {
+  position: relative;
+  width: min(660px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px clamp(20px, 4vw, 34px) 30px;
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7);
+
+  /* رنگ متن را صریح می‌گذاریم چون این پنجره ممکن است داخل
+     یک بخش تیره (مثل «میکس‌های ویژه») باز شود و آنجا رنگ
+     روشنِ همان بخش را به ارث می‌برد — روی زمینهٔ کاهیِ خودش
+     ناخوانا می‌شد. */
+  color: var(--espresso);
+}
+.sheet .card-origin {
+  color: var(--sage-deep);
+}
+.sheet .card-process,
+.sheet .sheet-price small {
+  color: var(--soft);
+}
+/* ── گوشهٔ کنش‌های پنجره ──
+   پیش‌تر فقط دکمهٔ بستن اینجا بود و خودش را absolute
+   می‌کرد. حالا دو دکمه‌اند، پس ظرفشان absolute است و
+   خودشان در یک ردیف می‌نشینند — این‌طور جای دکمهٔ بستن
+   نسبت به قبل عوض نمی‌شود و دکمهٔ تازه کنارش می‌آید. */
+.sheet-actions {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sheet-close {
+  position: static;
+}
+/* دکمهٔ هم‌رسانی کنار × کمی کوچک‌تر است تا × همچنان
+   بزرگ‌ترین چیزِ آن گوشه بماند */
+.sheet-share {
+  inline-size: 30px;
+  block-size: 30px;
+}
+.sheet-share svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.sheet-head {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-block-end: 18px;
+}
+.sheet-art {
+  width: 120px;
+  height: 96px;
+  flex: none;
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.sheet-art .card-art {
+  width: 100%;
+  height: 100%;
+}
+.sheet h2 {
+  font-size: 1.75rem;
+  margin-block: 2px 6px;
+}
+.sheet-price {
+  margin: 10px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.sheet-price b {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.25rem;
+}
+.sheet-price small {
+  font-size: 0.75rem;
+  color: var(--soft);
+}
+
+.sheet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-block-end: 20px;
+}
+.chip-static,
+.chip-taste,
+.chip-note {
+  font-size: 0.72rem;
+  border-radius: 100px;
+  padding: 0.22em 0.75em;
+}
+.chip-static {
+  background: var(--espresso);
+  color: var(--paper);
+}
+.chip-taste {
+  background: rgba(110, 127, 87, 0.16);
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+.chip-note {
+  background: var(--paper-2);
+  color: var(--espresso-2);
+}
+
+.sheet-block {
+  margin-block-end: 20px;
+}
+.sheet-block h3 {
+  font-size: 1.05rem;
+  color: var(--cherry);
+  margin-block-end: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sheet-block h3::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--brass);
+  border-radius: 2px;
+  flex: none;
+}
+.sheet-block p {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.sheet-mix {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.sheet-mix li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 0.4em 0.9em;
+  font-size: 0.88rem;
+}
+.sheet-mix b {
+  font-family: var(--font-lalezar), sans-serif;
+}
+
+.sheet-hint {
+  font-size: 0.82rem;
+  color: var(--soft);
+  margin: 0;
+}
+
+/* ─── چرا از ما بخرید ─── */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+}
+.why-card {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  transition:
+    transform 0.22s var(--ease),
+    border-color 0.22s,
+    box-shadow 0.22s;
+}
+.why-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--sage-deep);
+  box-shadow: var(--shadow);
+}
+.why-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(178, 58, 43, 0.1);
+  color: var(--cherry);
+  margin-block-end: 14px;
+}
+.why-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.why-card h3 {
+  font-size: 1.12rem;
+  margin-block-end: 8px;
+}
+.why-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--soft);
+}
+.why-cta {
+  margin-block-start: 28px;
+  text-align: center;
+}
+
+/* ─── چه طعمی دوست دارید؟ ─── */
+
+.taste-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-block-end: 24px;
+}
+.taste-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  background: var(--paper-3);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 0.6em 1.1em;
+  cursor: pointer;
+  font: inherit;
+  text-align: start;
+  transition: all 0.18s var(--ease);
+}
+.taste-chip b {
+  font-size: 0.95rem;
+}
+.taste-chip span {
+  font-size: 0.72rem;
+  color: var(--soft);
+}
+.taste-chip:hover {
+  border-color: var(--sage-deep);
+  transform: translateY(-2px);
+}
+.taste-chip.is-active {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  color: var(--paper);
+}
+.taste-chip.is-active span {
+  color: var(--crema);
+}
+
+.taste-advice {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--brass);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-block-end: 26px;
+}
+.taste-advice h3 {
+  font-size: 1.2rem;
+  margin-block-end: 8px;
+}
+.taste-advice p {
+  margin: 0;
+  color: var(--soft);
+  font-size: 0.94rem;
+}
+
+/* ─── پیشنهاد روز و پرفروش‌ها ─── */
+
+.pick-head {
+  margin-block: 6px 18px;
+}
+.pick-head h3 {
+  font-size: 1.35rem;
+}
+.pick-head p {
+  margin: 4px 0 0;
+  color: var(--soft);
+  font-size: 0.88rem;
+}
+.pick-head-sub {
+  margin-block-start: 34px;
+  padding-block-start: 22px;
+  border-block-start: 1px dashed var(--line);
+}
+
+.daily-wrap {
+  position: relative;
+}
+.daily-wrap .grid-inner {
+  grid-template-columns: minmax(0, 360px);
+}
+.daily-flag {
+  display: inline-block;
+  margin-block-end: 10px;
+  background: var(--cherry);
+  color: #fff6f2;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 0.24em 0.95em;
+}
+
+/* ─── میکس‌های ویژه ─── */
+
+.mix-note {
+  color: var(--crema);
+  font-size: 0.9rem;
+  margin-block-end: 22px;
+}
+
+.blend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 22px;
+}
+
+.blend-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-3);
+  color: var(--espresso);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.blend-head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  position: relative;
+}
+.blend-art {
+  width: 78px;
+  height: 64px;
+  flex: none;
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.blend-art .card-art {
+  width: 100%;
+  height: 100%;
+}
+.blend-title h3 {
+  font-size: 1.3rem;
+  margin-block: 2px 4px;
+}
+.blend-card .badge {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.mix-rows {
+  display: grid;
+  gap: 14px;
+  margin-block: 16px;
+}
+.mix-row {
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 12px 14px;
+}
+.mix-row.is-locked {
+  opacity: 0.75;
+}
+.mix-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.mix-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.mix-lock {
+  font-style: normal;
+  font-size: 0.64rem;
+  font-weight: 700;
+  background: var(--espresso);
+  color: var(--paper);
+  border-radius: 100px;
+  padding: 0 0.6em;
+}
+.mix-val {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.05rem;
+  color: var(--cherry);
+}
+
+.mix-row-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: 8px;
+}
+.range-mix {
+  flex: 1;
+  height: 6px;
+}
+.range-mix:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.mix-drop {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1.5px solid var(--line);
+  background: var(--paper-3);
+  color: var(--soft);
+  font-size: 1rem;
+  line-height: 1;
+  transition: all 0.18s;
+}
+.mix-drop:hover {
+  background: var(--cherry);
+  border-color: var(--cherry);
+  color: #fff;
+}
+
+.mix-meta {
+  margin: 6px 0 0;
+  font-size: 0.74rem;
+  color: var(--soft);
+}
+
+.mix-add {
+  display: block;
+  margin-block-end: 14px;
+}
+.mix-add .field-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--soft);
+  margin-block-end: 5px;
+}
+
+.mix-sum {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-block: 10px;
+  margin-block-end: 14px;
+  border-block: 1px dashed var(--line);
+  font-size: 0.85rem;
+  color: var(--soft);
+}
+.mix-sum b {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.1rem;
+  color: var(--sage-deep);
+}
+.mix-sum b.is-off {
+  color: var(--cherry);
+}
+.mix-reset {
+  margin-inline-start: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--cherry);
+  border-block-end: 1px dashed currentColor;
+}
+
+.blend-card .card-foot {
+  margin-block-start: auto;
+}
+.blend-card .card-more {
+  margin: 12px 0 0;
+}
+
+/* ─── حالت تصویری ساز میکس ───
+   نمای دومِ همان ترکیب: کیسه‌ها، دستگاه، و بستهٔ آماده.
+   هرچه اینجا حرکت می‌کند فقط transform و opacity است — چیدمان
+   صفحه دست نمی‌خورد و مرورگر گوشی مجبور به layout دوباره نیست.
+   جای‌گیریِ هر چیزِ متحرک هم با translate در CSS است، نه با صفت
+   transform روی SVG؛ وگرنه مبدأ چرخش جابه‌جا می‌شد. */
+
+.mix-mode {
+  display: flex;
+  justify-content: flex-end;
+  margin-block: 14px 0;
+}
+.mix-mode-btn {
+  background: none;
+  border: 1.5px dashed var(--line);
+  border-radius: 100px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--sage-deep);
+  padding: 0.25em 1.1em;
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+.mix-mode-btn:hover,
+.mix-mode-btn.is-on {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+  color: var(--paper);
+}
+
+.mixv {
+  margin-block: 14px;
+}
+
+/* متنی که فقط صفحه‌خوان می‌خواند */
+.sr-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── نوار مرحله‌ها ── */
+.mixv-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-end: 10px;
+}
+.mixv-steps {
+  display: flex;
+  gap: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: none;
+}
+.mixv-steps b {
+  display: block;
+  inline-size: 19px;
+  block-size: 19px;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--espresso);
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 0.74rem;
+  line-height: 19px;
+  text-align: center;
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+.mixv-steps li.is-done b {
+  background: var(--sage);
+}
+.mixv-steps li.is-on b {
+  background: var(--cherry);
+  color: #fff;
+}
+.mixv-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--espresso);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── صحنه ── */
+.mixv-stage {
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* قدِ جعبه در هر چهار مرحله ثابت است — وگرنه لحظهٔ تحویلِ بسته،
+     که صحنه جای خودش را به بسته می‌دهد، کلِ کارت می‌پرید. */
+  min-block-size: 212px;
+  overflow: hidden;
+}
+.mixv-scene {
+  inline-size: 100%;
+  max-inline-size: 340px;
+  block-size: auto;
+}
+.mixv-scene text {
+  font-size: 8px;
+  fill: var(--soft);
+}
+.mixv-scene .sack-pct {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 9px;
+  fill: var(--espresso);
+}
+.mixv-scene .sack-done {
+  font-size: 11px;
+  fill: var(--sage-deep);
+  animation: mixv-pop 0.3s var(--ease) both;
+}
+
+/* سطح قیف: مستطیل کامل کشیده می‌شود و به‌اندازهٔ خالی بودن
+   قیف پایین می‌رود؛ برشِ قیف بقیه‌اش را می‌خورد. یعنی «پر شدن»
+   هم فقط یک translate است. */
+/* سطح قیف با همان مدتی بالا می‌آید که کیسه دارد می‌ریزد؛
+   linear است تا جریان یکنواخت به‌نظر بیاید. */
+.hopper-fill {
+  transform: translateY(calc(40px * (1 - var(--level, 0))));
+  transition:
+    transform var(--pour, 420ms) linear,
+    fill var(--pour, 420ms) linear;
+}
+
+.tumbler {
+  transform-origin: 0 0;
+  transform: translate(70px, 100px);
+}
+
+.machine-lines,
+.stream {
+  opacity: 0;
+}
+
+/* کیسه: با مبدأ ۰،۰ کشیده شده و پایه‌اش روی خط زمین است، پس
+   translate جایش می‌گذارد، scale از همان پایه بزرگش می‌کند و
+   rotate هم دور همان پایه می‌چرخاندش. */
+.sack {
+  transform-origin: 0 0;
+  transform: translate(var(--x), var(--y)) scale(var(--s));
+  transition: transform 0.35s var(--ease);
+}
+.sack.is-empty {
+  transform: translate(var(--x), var(--y)) scale(var(--s)) scaleY(0.52);
+}
+
+/* ── مرحلهٔ ۲: نوبتِ همین کیسه ──
+   مدت از --pour می‌آید و آن را جاوااسکریپت به‌نسبت درصدِ همین
+   کیسه حساب کرده: کیسهٔ ٪۷۰ محسوس‌تر از کیسهٔ ٪۳۰ می‌ریزد.
+   قاب آخر عمداً همان حالتِ .is-empty است تا لحظهٔ عوض شدن
+   کلاس، پرشی دیده نشود. */
+.sack.is-pouring {
+  animation: mixv-pour var(--pour, 420ms) var(--ease) both;
+}
+
+@keyframes mixv-pour {
+  0% {
+    transform: translate(var(--x), var(--y)) scale(var(--s));
+  }
+  22% {
+    transform: translate(var(--hx), var(--hy)) rotate(var(--tilt)) scale(var(--s));
+  }
+  72% {
+    transform: translate(var(--hx), var(--hy)) rotate(var(--tilt)) scale(var(--s)) scaleY(0.52);
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(var(--s)) scaleY(0.52);
+  }
+}
+
+/* جریان فقط وقتی دیده می‌شود که کیسه‌ای بالای قیف باشد */
+.mixv[data-stage='pour'] .stream {
+  opacity: 1;
+  transition: opacity 0.12s 0.14s;
+}
+.mixv[data-stage='pour'] .stream-bean {
+  animation: mixv-fall 0.4s linear infinite;
+  animation-delay: calc(var(--i) * 0.08s);
+}
+
+@keyframes mixv-fall {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(26px);
+    opacity: 0;
+  }
+}
+
+/* ── مرحلهٔ ۳: دستگاه کار می‌کند ──
+   لرزش ریز، چرخشِ همزن پشت دریچه، و چند خط حرکت. کوتاه است
+   (۱۷۰۰ میلی‌ثانیه) و دکمهٔ «رد کردن نمایش» هم دارد. */
+.mixv[data-stage='mix'] .machine {
+  animation: mixv-shake 0.16s linear infinite;
+}
+.mixv[data-stage='mix'] .tumbler {
+  animation: mixv-spin 0.75s linear infinite;
+}
+.mixv[data-stage='mix'] .machine-lines {
+  animation: mixv-blink 0.5s ease-in-out infinite alternate;
+}
+.mixv[data-stage='mix'] .machine-lamp {
+  animation: mixv-blink 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes mixv-shake {
+  0%,
+  100% {
+    transform: translate(0.7px, 0);
+  }
+  50% {
+    transform: translate(-0.7px, 0.5px);
+  }
+}
+@keyframes mixv-spin {
+  to {
+    transform: translate(70px, 100px) rotate(360deg);
+  }
+}
+@keyframes mixv-blink {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── مرحلهٔ ۴: بسته تحویل داده می‌شود ── */
+.mixv-bag {
+  animation: mixv-drop var(--settle, 420ms) var(--ease) both;
+}
+/* دکمهٔ افزودن بعد از نشستنِ بسته پیدا می‌شود — ولی از همان اول
+   در DOM هست و فوکوس رویش می‌رود، تا کاربر صفحه‌کلید منتظر
+   انیمیشن نماند. */
+.mixv-add {
+  animation: mixv-pop 0.3s var(--settle, 420ms) var(--ease) both;
+}
+
+@keyframes mixv-drop {
+  0% {
+    transform: translateY(-14px) scale(0.94);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(3px) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes mixv-pop {
+  from {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* «حرکت کمتر»: قاعدهٔ سراسری پایین این فایل مدت هر انیمیشن را
+   صفر می‌کند، پس همین‌جا فقط جریان و خط‌ها را خاموش می‌کنیم تا
+   چیزی وسط صحنه یخ‌زده نماند. سمت جاوااسکریپت هم مرحله‌ها را
+   یک‌جا رد می‌کند و مستقیم به بسته می‌رسد. */
+@media (prefers-reduced-motion: reduce) {
+  .mixv .stream,
+  .mixv .machine-lines {
+    display: none;
+  }
+}
+
+/* ── بستهٔ آماده ── */
+.mixv-bag {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 168px;
+}
+.mixv-bag .bag-art {
+  inline-size: 100%;
+  block-size: auto;
+}
+.bag-art text {
+  direction: rtl;
+  fill: var(--espresso);
+}
+.bag-art .bag-brand {
+  font-size: 8px;
+  fill: var(--soft);
+}
+.bag-art .bag-name {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 15px;
+}
+.bag-art .bag-part {
+  font-size: 9px;
+  fill: var(--ink-2);
+}
+.bag-art .bag-more {
+  fill: var(--soft);
+}
+
+/* ── دکمه‌ها و اهرم‌های زیر صحنه ── */
+.mixv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 12px;
+}
+.mixv-actions .btn {
+  flex: 1 1 auto;
+  padding-inline: 1.1em;
+}
+/* کنشِ اصلی یک ردیف کامل برای خودش دارد؛ دکمه‌های فرعی زیرش
+   کنار هم می‌نشینند و روی صفحهٔ ۳۶۰ پیکسلی هم جا می‌شوند. */
+.mixv-actions .btn-primary {
+  flex: 1 1 100%;
+}
+.mixv-actions .btn-ghost {
+  font-size: 0.86rem;
+  padding-inline: 0.9em;
+}
+
+.mixv-beans {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.mixv-beans li {
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 10px 12px;
+}
+.mixv-bean-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.mixv-bean-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.mixv-bean-name i {
+  inline-size: 13px;
+  block-size: 13px;
+  border-radius: 50%;
+  background: var(--tone);
+  border: 1px solid rgba(30, 23, 16, 0.18);
+  flex: none;
+}
+
+/* ─── باشگاه مشتریان ─── */
+
+.club {
+  background: var(--paper-2);
+}
+.club-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+.club-copy h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+  margin-block-end: 12px;
+}
+
+.club-form {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px clamp(20px, 3vw, 30px);
+  box-shadow: var(--shadow);
+}
+.club-note {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  color: var(--soft);
+  text-align: center;
+}
+.club-form .field-label em {
+  font-style: normal;
+  color: var(--soft);
+  font-size: 0.72rem;
+}
+
+.club-done {
+  text-align: center;
+}
+.club-done h3 {
+  font-size: 1.35rem;
+  margin-block: 12px 8px;
+}
+.club-done p {
+  color: var(--soft);
+  font-size: 0.92rem;
+}
+
+/* ─── دربارهٔ ما ─── */
+
+.about-top {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+  margin-block-end: 32px;
+}
+.about-photo {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-photo figcaption {
+  background: var(--paper-3);
+  color: var(--soft);
+  font-size: 0.78rem;
+  padding: 0.6em 1em;
+  text-align: center;
+}
+
+.about-facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.about-facts li {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 16px 14px;
+  text-align: center;
+}
+.about-facts b {
+  display: block;
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.5rem;
+  color: var(--cherry);
+}
+.about-facts span {
+  font-size: 0.76rem;
+  color: var(--soft);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.about-card {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+}
+.about-card h3 {
+  font-size: 1.1rem;
+  margin-block-end: 8px;
+  color: var(--cherry);
+}
+.about-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--soft);
+}
+
+.about-visit {
+  margin-block-start: 28px;
+  background: var(--espresso);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 26px clamp(20px, 3vw, 32px);
+}
+.about-visit h3 {
+  font-size: 1.25rem;
+  margin-block-end: 14px;
+  color: var(--crema);
+}
+.about-visit ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.about-visit li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+.about-visit span {
+  min-width: 72px;
+  font-size: 0.75rem;
+  color: var(--latte);
+}
+.about-visit a:hover {
+  color: var(--crema);
+}
+
+/* ─── ردیف‌های سبد: میکس و آسیاب ─── */
+
+.cart-mix {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: grid;
+  gap: 4px;
+}
+.cart-mix li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: var(--soft);
+  background: var(--paper-2);
+  border-radius: 8px;
+  padding: 0.22em 0.7em;
+}
+.cart-mix b {
+  font-family: var(--font-lalezar), sans-serif;
+  color: var(--espresso);
+}
+
+.cart-grind {
+  display: block;
+  margin-block-start: 10px;
+}
+.cart-grind .field-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--soft);
+  margin-block-end: 4px;
+}
+.cart-grind .select {
+  padding: 0.45em 0.8em;
+  font-size: 0.82rem;
+}
+
+/* ─── واکنش‌گرایی ─── */
+@media (max-width: 1000px) {
+  .gallery {
+    grid-auto-rows: 170px;
+  }
+}
+
+@media (max-width: 960px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-photo {
+    object-position: 60% center;
+  }
+  .bulk-inner {
+    grid-template-columns: 1fr;
+  }
+  .story-inner {
+    grid-template-columns: 1fr;
+  }
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .toolbar {
+    align-items: flex-start;
+  }
+  .club-inner {
+    grid-template-columns: 1fr;
+  }
+  .about-top {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .btn-burger {
+    display: block;
+  }
+  .nav {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--paper);
+    border-block-end: 1px solid var(--line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s var(--ease);
+    margin-inline-start: 0;
+  }
+  .nav.is-open {
+    max-height: 520px;
+    overflow-y: auto;
+  }
+  .nav a {
+    padding: 14px 6%;
+    border-block-end: 1px solid var(--line);
+  }
+  .site-header {
+    position: relative;
+  }
+  .header-inner {
+    flex-wrap: wrap;
+  }
+  .header-actions {
+    margin-inline-start: auto;
+  }
+  .btn-cart span,
+  .btn-track span {
+    display: none;
+  }
+  /* بی‌برچسب، دو دکمهٔ گرد کنار هم می‌مانند و جا باز
+     می‌شود؛ نام لینک از aria-label می‌آید. */
+  .btn-track {
+    padding: 0.5em 0.7em;
+  }
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-facts {
+    gap: 18px;
+  }
+  .strip-inner {
+    justify-content: flex-start;
+    gap: 8px 22px;
+    font-size: 0.78rem;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 210px;
+  }
+  .shot,
+  .shot-wide {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .tools {
+    width: 100%;
+  }
+  .search input {
+    width: 100%;
+  }
+  .search {
+    flex: 1;
+  }
+  .cat-head h3 {
+    border-inline-end: none;
+    padding-inline-end: 0;
+  }
+  .blend-grid {
+    grid-template-columns: 1fr;
+  }
+  .sheet-head {
+    flex-direction: column;
+  }
+  .sheet-art {
+    width: 100%;
+    height: 120px;
+  }
+  .about-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .daily-wrap .grid-inner {
+    grid-template-columns: 1fr;
+  }
+  .taste-chip {
+    flex: 1 1 44%;
+  }
+}
+
+/* ── گوشی‌های باریک: هدر باید یک ردیف بماند ──
+   با آمدنِ دکمهٔ پیگیری، مجموعِ لوگو و سه کنترل از عرضِ
+   ۳۶۰ پیکسل رد می‌شد و header-inner (که wrap دارد) لوگو
+   را می‌انداخت یک ردیف بالاتر — هدرِ چسبان ۲۰ پیکسل
+   بلندتر می‌شد. به‌جای پذیرفتنِ آن، همان چیزهایی که در
+   این عرض جای اضافه دارند کمی جمع می‌شوند: فاصله‌ها،
+   نرمهٔ دکمه‌ها و اندازهٔ نامِ فروشگاه. */
+@media (max-width: 420px) {
+  .header-inner {
+    gap: 10px;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+  .logo-text {
+    font-size: 1.05rem;
+  }
+  .btn-cart {
+    padding: 0.55em 0.75em;
+  }
+  .btn-track {
+    padding: 0.5em 0.55em;
+  }
+  .btn-burger {
+    padding: 8px 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .card {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ─── صفحهٔ پیگیری سفارش ─── */
+/* بیشترِ ظاهر این صفحه از استایل رسید می‌آید (receipt-*)
+   تا مشتری همان چیزی را ببیند که موقع ثبت دیده بود.
+   این‌ها فقط چیزهایی‌اند که رسید ندارد: فرم جست‌وجو و
+   نوار مرحله‌ها. */
+.track-wrap {
+  max-inline-size: 720px;
+}
+
+.track-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.track-form .field {
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .track-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.track-result {
+  margin-block-start: 26px;
+}
+.track-head {
+  text-align: center;
+  margin-block-end: 18px;
+}
+.track-status {
+  font-size: 0.95rem;
+  margin-block-start: 8px;
+}
+.track-status b {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.05rem;
+  color: var(--sage-deep);
+}
+/* سفارش لغوشده نباید با همان سبزِ «همه‌چیز خوب است» نوشته شود */
+.track-status.is-canceled b {
+  color: var(--cherry-dark);
+}
+
+/* نوار مرحله‌ها — خط زیرِ نقطه‌ها با ::before کشیده می‌شود
+   تا در هر دو جهت درست بیفتد (اینجا فقط راست‌به‌چپ لازم
+   است، ولی با ویژگی‌های منطقی نوشتنش هزینه‌ای ندارد). */
+.track-steps {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  text-align: center;
+}
+.track-steps li {
+  position: relative;
+  padding-block-start: 22px;
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+.track-steps li::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline: -50% 50%;
+  block-size: 2px;
+  background: var(--line);
+}
+.track-steps li:first-child::before {
+  display: none;
+}
+.track-dot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: calc(50% - 7px);
+  inline-size: 14px;
+  block-size: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--line);
+}
+.track-steps li.is-past .track-dot,
+.track-steps li.is-now .track-dot {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+}
+.track-steps li.is-past::before,
+.track-steps li.is-now::before {
+  background: var(--sage-deep);
+}
+.track-steps li.is-now {
+  color: var(--espresso);
+  font-weight: 700;
+}
+
+.track-canceled {
+  background: rgba(178, 58, 43, 0.1);
+  color: var(--cherry-dark);
+  border: 1px solid rgba(178, 58, 43, 0.3);
+  border-radius: var(--radius-s);
+  padding: 0.8em 1em;
+  font-size: 0.88rem;
+  margin-block-end: 18px;
+  text-align: center;
+}
+
+.track-owner {
+  font-size: 0.85rem;
+  color: var(--soft);
+  margin: 0 0 10px;
+}
+/* دکمهٔ چاپ زیر برگهٔ سفارش — همان .btn .btn-ghost سایت،
+   با آیکنی هم‌خانوادهٔ بقیه (خط ۱.۷، بدون پرکردن). */
+.track-actions {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 16px;
+}
+.track-actions .btn svg {
+  inline-size: 18px;
+  block-size: 18px;
+  flex: none;
+}
+.track-foot {
+  font-size: 0.78rem;
+  color: var(--soft);
+  text-align: center;
+  margin-block-start: 14px;
+}
+
+/* ─── صفحهٔ اختصاصی کالا ─── */
+/* مورد ۲۷: هر کالا آدرس خودش را دارد و با بازدید سرد
+   هم بالا می‌آید. چیدمان دو ستونه است — کارت خرید در
+   یک ستون و متن معرفی در ستون دیگر — چون کسی که از
+   گوگل می‌آید هم باید بخواند و هم بتواند بخرد، بدون
+   اسکرول کردن تا ته صفحه. */
+.item-page {
+  padding-block: clamp(24px, 5vw, 54px);
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--soft);
+  margin-block-end: 18px;
+}
+.crumbs a {
+  color: var(--sage-deep);
+}
+.crumbs [aria-current='page'] {
+  color: var(--espresso-2);
+}
+
+.item-page-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: clamp(24px, 4vw, 46px);
+  align-items: start;
+}
+
+/* کارت داخل این صفحه دیگر عضو یک شبکه نیست، پس
+   انیمیشن ورودِ useReveal رویش نمی‌نشیند و باید از
+   همان اول دیده شود. */
+.item-page-card .card {
+  opacity: 1;
+  transform: none;
+}
+
+.item-page-body h1 {
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  margin-block: 0 14px;
+}
+
+@media (max-width: 860px) {
+  .item-page-grid {
+    grid-template-columns: 1fr;
+  }
+}

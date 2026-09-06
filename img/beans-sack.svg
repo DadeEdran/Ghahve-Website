@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="گونی دانهٔ قهوه و دانه‌های ریخته‌شده">
+  <defs>
+    <linearGradient id="sBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6EFE3"/>
+      <stop offset="1" stop-color="#E4D6BE"/>
+    </linearGradient>
+    <linearGradient id="burlap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B98C"/>
+      <stop offset=".5" stop-color="#C09B69"/>
+      <stop offset="1" stop-color="#9C7845"/>
+    </linearGradient>
+    <linearGradient id="bean1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7A4E22"/>
+      <stop offset="1" stop-color="#3A2510"/>
+    </linearGradient>
+    <linearGradient id="bean2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B3717"/>
+      <stop offset="1" stop-color="#26170A"/>
+    </linearGradient>
+    <pattern id="weave" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M0 0h10M0 5h10" stroke="#7A5A32" stroke-opacity=".18" stroke-width="2"/>
+      <path d="M0 0v10M5 0v10" stroke="#7A5A32" stroke-opacity=".12" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#sBg)"/>
+  <ellipse cx="400" cy="528" rx="330" ry="46" fill="#8A6E45" opacity=".18"/>
+
+  <!-- گونی -->
+  <g transform="translate(300 300)">
+    <path d="M-152 232c-24-138 6-216 34-256-22-24-10-48 20-42 18-26 66-30 90-8 34-12 62 12 50 40 28 34 60 130 44 266Z" fill="url(#burlap)"/>
+    <path d="M-152 232c-24-138 6-216 34-256-22-24-10-48 20-42 18-26 66-30 90-8 34-12 62 12 50 40 28 34 60 130 44 266Z" fill="url(#weave)"/>
+    <path d="M-118 -24c40-18 118-20 172 0" stroke="#8B6A3C" stroke-width="7" fill="none"/>
+    <path d="M-142 100h276" stroke="#8B6A3C" stroke-width="5" fill="none" opacity=".5"/>
+    <!-- برچسب گونی -->
+    <g transform="translate(-6 96)">
+      <rect x="-92" y="-46" width="184" height="96" rx="10" fill="#F1E6D0" opacity=".92"/>
+      <rect x="-92" y="-46" width="184" height="96" rx="10" fill="none" stroke="#8B6A3C" stroke-width="3"/>
+      <g fill="#3A2510">
+        <ellipse cx="-46" cy="-14" rx="20" ry="14" transform="rotate(-18 -46 -14)"/>
+        <path d="M-62 -14c12-10 12 10 32-10" stroke="#C09B69" stroke-width="3" fill="none"/>
+      </g>
+      <g stroke="#6B4A2F" stroke-width="7" stroke-linecap="round" opacity=".7">
+        <path d="M-8 -22h84M-8 -2h56"/>
+      </g>
+      <g stroke="#B23A2B" stroke-width="7" stroke-linecap="round">
+        <path d="M-70 24h140"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- دانه‌های ریخته‌شده -->
+  <g>
+    <g transform="translate(556 430) rotate(-18)"><ellipse rx="34" ry="24" fill="url(#bean1)"/><path d="M-26 0c10-11 10 11 26-11" stroke="#A9713C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(624 476) rotate(22)"><ellipse rx="32" ry="23" fill="url(#bean2)"/><path d="M-24 0c9-10 9 10 24-10" stroke="#8A5A2C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(542 508) rotate(56)"><ellipse rx="30" ry="21" fill="url(#bean1)"/><path d="M-22 0c8-9 8 9 22-9" stroke="#A9713C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(688 428) rotate(-40)"><ellipse rx="28" ry="20" fill="url(#bean2)"/><path d="M-21 0c8-9 8 9 21-9" stroke="#8A5A2C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(630 372) rotate(8)"><ellipse rx="26" ry="19" fill="url(#bean1)"/><path d="M-20 0c7-8 7 8 20-8" stroke="#A9713C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(716 508) rotate(-8)"><ellipse rx="27" ry="19" fill="url(#bean1)"/><path d="M-20 0c7-8 7 8 20-8" stroke="#A9713C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(120 498) rotate(28)"><ellipse rx="30" ry="21" fill="url(#bean2)"/><path d="M-22 0c8-9 8 9 22-9" stroke="#8A5A2C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(62 452) rotate(-34)"><ellipse rx="26" ry="19" fill="url(#bean1)"/><path d="M-20 0c7-8 7 8 20-8" stroke="#A9713C" stroke-width="4" fill="none"/></g>
+    <g transform="translate(186 528) rotate(-6)"><ellipse rx="24" ry="17" fill="url(#bean2)"/><path d="M-18 0c7-7 7 7 18-7" stroke="#8A5A2C" stroke-width="4" fill="none"/></g>
+  </g>
+
+  <!-- شاخهٔ گیلاس قهوه -->
+  <g transform="translate(690 150)">
+    <path d="M-110 60C-60 40-10 26 42 24" stroke="#6E7F57" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <g fill="#6E7F57">
+      <path d="M-84 52c-20-24-52-26-70-14 18 22 50 28 70 14Z"/>
+      <path d="M-28 34c-16-26-48-32-68-22 15 24 46 34 68 22Z"/>
+      <path d="M22 24c-12-28-42-38-64-30 12 26 42 38 64 30Z"/>
+    </g>
+    <g fill="#B23A2B">
+      <circle cx="-96" cy="76" r="19"/><circle cx="-48" cy="60" r="17"/><circle cx="4" cy="48" r="18"/><circle cx="46" cy="42" r="15"/>
+    </g>
+    <g fill="#8E2A1E" opacity=".55">
+      <circle cx="-90" cy="82" r="7"/><circle cx="-43" cy="66" r="6"/><circle cx="9" cy="54" r="6"/>
+    </g>
+  </g>
+</svg>

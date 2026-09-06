@@ -1,0 +1,17 @@
+{
+  "name": "@ghahve/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "منطق مشترک فروشگاه و سرور — قیمت‌گذاری، کلیدهای دسته‌بندی و آدرس‌های عمومی",
+  "exports": {
+    "./pricing.js": "./pricing.js",
+    "./taxonomy.js": "./taxonomy.js",
+    "./seo.js": "./seo.js"
+  },
+  "files": [
+    "pricing.js",
+    "taxonomy.js",
+    "seo.js"
+  ]
+}

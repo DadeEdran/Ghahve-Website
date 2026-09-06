@@ -1,0 +1,22 @@
+node_modules/
+dist/
+
+# خروجی ساخت Next
+web/.next/
+web/out/
+
+# تنظیمات محرمانه — نسخهٔ نمونه‌اش (.env.example) در مخزن هست
+.env
+server/.env
+web/.env.local
+
+# عکس‌های آپلودشدهٔ مدیر
+server/uploads/*
+!server/uploads/.gitkeep
+
+# عکس‌های بازبینی ساخت مستندات — خروجی موقت، هر بار از نو ساخته می‌شود
+scripts/docs/.shots/
+
+*.log
+.DS_Store
+Thumbs.db

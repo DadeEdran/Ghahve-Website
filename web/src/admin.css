@@ -1,0 +1,1922 @@
+/* ══════════════════════════════════════════════════
+   پنل مدیریت + چند افزودهٔ کوچک به استایل فروشگاه.
+   همان پالت، همان فونت‌ها و همان زبان تصویری سایت —
+   فقط چیدمانی که برای کار روزمره راحت‌تر است.
+   ══════════════════════════════════════════════════ */
+
+/* نام فونت‌ها اینجا هم از راه متغیر می‌آید؛ دلیلش بالای
+   web/src/style.css نوشته شده. */
+
+/* ─── افزوده‌های فروشگاه ─── */
+
+/* پوستهٔ نامرئی دور تصویرِ تولیدی، تا چیدمان کارت عوض نشود */
+.art-holder {
+  display: contents;
+}
+
+/* عکس آپلودی مدیر، جای طرح تولیدی */
+img.card-art {
+  object-fit: cover;
+}
+.cart-thumb img.card-art {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-note {
+  text-align: center;
+  color: var(--soft);
+  padding-block: 50px;
+}
+
+.load-error {
+  text-align: center;
+  padding: 40px 20px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-3);
+}
+.load-error h2 {
+  margin-block-end: 8px;
+}
+.load-error p {
+  color: var(--cherry);
+}
+
+.form-error {
+  background: rgba(178, 58, 43, 0.1);
+  color: var(--cherry-dark);
+  border: 1px solid rgba(178, 58, 43, 0.3);
+  border-radius: var(--radius-s);
+  padding: 0.7em 1em;
+  font-size: 0.86rem;
+  margin-block: 12px;
+}
+.form-ok {
+  background: rgba(110, 127, 87, 0.14);
+  color: var(--sage-deep);
+  border: 1px solid rgba(110, 127, 87, 0.35);
+  border-radius: var(--radius-s);
+  padding: 0.7em 1em;
+  font-size: 0.86rem;
+  margin-block: 12px;
+}
+
+.form-lead {
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 0.8em 1em;
+  font-size: 0.88rem;
+  margin-block-end: 16px;
+}
+
+textarea.input {
+  font-family: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.btn-back {
+  margin-block-start: 8px;
+}
+
+/* رسید ثبت سفارش */
+.order-done {
+  text-align: center;
+  padding-block: 40px 20px;
+}
+.order-done-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(110, 127, 87, 0.16);
+  color: var(--sage-deep);
+}
+.order-done-mark svg {
+  width: 32px;
+  height: 32px;
+}
+.order-done h3 {
+  font-size: 1.4rem;
+  margin-block-end: 10px;
+}
+.order-code {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.1rem;
+  background: var(--paper-2);
+  border-radius: var(--radius-s);
+  padding: 0.5em 1em;
+  display: inline-block;
+  margin-block-end: 14px;
+}
+.order-code b {
+  letter-spacing: 1px;
+}
+
+/* رسیدِ کامل خرید — همان چیزی که مشتری بعد از ثبت می‌بیند */
+.order-done {
+  padding-block: 26px 14px;
+}
+.receipt-date {
+  font-size: 0.8rem;
+  color: var(--soft);
+}
+
+.receipt-sheet {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-3);
+  padding: 16px 18px;
+  margin-block-end: 8px;
+}
+.receipt-h {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.05rem;
+  margin: 0 0 10px;
+  padding-block-end: 7px;
+  border-block-end: 1px solid var(--line);
+}
+
+.receipt-lines {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.receipt-lines > li {
+  padding-block-end: 12px;
+  border-block-end: 1px dashed var(--line);
+}
+.receipt-lines > li:last-child {
+  border-block-end: none;
+  padding-block-end: 0;
+}
+
+.receipt-line-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+.receipt-line-top b {
+  font-size: 0.98rem;
+}
+.receipt-line-price {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.receipt-line-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin-block-start: 2px;
+}
+.receipt-line-meta .dot {
+  opacity: 0.6;
+}
+.receipt-grind {
+  font-size: 0.8rem;
+  margin-block-start: 6px;
+}
+.receipt-grind b {
+  font-weight: 700;
+}
+
+.receipt-mix {
+  margin-block-start: 8px;
+  padding: 9px 11px;
+  background: rgba(110, 127, 87, 0.1);
+  border: 1px solid rgba(110, 127, 87, 0.28);
+  border-radius: var(--radius-s);
+}
+.receipt-mix-title {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sage-deep);
+  margin-block-end: 6px;
+}
+.receipt-mix ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.receipt-mix li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.82rem;
+}
+.receipt-mix li b {
+  font-family: var(--font-lalezar), sans-serif;
+  color: var(--sage-deep);
+  font-size: 0.92rem;
+  min-inline-size: 3.2em;
+  text-align: end;
+}
+.receipt-mix li small {
+  font-size: 0.72rem;
+  color: var(--soft);
+  min-inline-size: 5.5em;
+  text-align: end;
+}
+
+.receipt-block {
+  margin-block-start: 16px;
+}
+.receipt-block p {
+  font-size: 0.85rem;
+  margin: 0 0 4px;
+  line-height: 1.9;
+}
+.receipt-addr {
+  color: var(--soft);
+}
+.receipt-contact-row {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  border-block-start: 1px dashed var(--line);
+  padding-block-start: 6px;
+  margin-block-start: 6px;
+}
+.receipt-contact-row > span:first-child {
+  font-size: 0.75rem;
+  color: var(--soft);
+  min-inline-size: 5em;
+}
+.receipt-contact-row a {
+  color: var(--cherry);
+  font-weight: 700;
+}
+.receipt-contact-row a:hover {
+  text-decoration: underline;
+}
+.receipt-foot {
+  font-size: 0.74rem;
+  color: var(--soft);
+  text-align: center;
+  margin-block-start: 14px;
+  padding-block-start: 10px;
+  border-block-start: 1px dashed var(--line);
+}
+
+/* ══════════════════════════════════════════════════
+   چاپ رسید.
+
+   میزبانش web/src/components/PrintSheet.jsx است و آنجا
+   نوشته چرا رسید دوباره و به‌شکل فرزندِ مستقیم body
+   رندر می‌شود. اینجا فقط نتیجه‌اش استفاده می‌شود:
+   می‌شود بقیهٔ فرزندان body را با `display: none`
+   برداشت، نه با `visibility` — که تنها رنگ را می‌برد و
+   ارتفاع را نگه می‌دارد و همان بود که ۳۳ صفحه کاغذ
+   سفید می‌داد.
+
+   هدف: یک برگ A4 برای سفارش‌های معمولی، و برای سفارش
+   بلند، شکستنِ تمیز — نه سرصفحهٔ تنها، نه ردیفی که وسطش
+   دو نیم شود.
+   ══════════════════════════════════════════════════ */
+.print-sheet {
+  display: none;
+}
+
+@media print {
+  /* A4 با حاشیهٔ ۱۲ میلی‌متری: ۱۸۶×۲۷۳ میلی‌متر فضای
+     مفید — برای رسیدِ چندردیفه با ته‌مانده جا می‌ماند. */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  /* ارتفاع و اسکرول صفحهٔ فروشگاه نباید به سند چاپی
+     برسد؛ کشوی سبد موقع باز بودن overflow را روی body
+     قفل می‌کند و آن هم اینجا باز می‌شود. */
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    block-size: auto !important;
+    overflow: visible !important;
+  }
+
+  /* تنها چیزی که چاپ می‌شود. هر چیز دیگری — هدر، فهرست
+     کالاها، تصویرهای SVG کارت‌ها، فوتر، کشو، توست — از
+     چیدمانِ کاغذ بیرون می‌رود.
+
+     شرطِ کلاس روی body عمدی است: این قاعده فقط وقتی
+     برقرار می‌شود که رسیدی برای چاپ باشد، وگرنه چاپِ
+     خودِ فروشگاه یک برگ سفید می‌شد. کلاس را
+     PrintSheet می‌گذارد و برمی‌دارد. */
+  body.has-print-sheet > *:not(.print-sheet) {
+    display: none !important;
+  }
+
+  .print-sheet {
+    display: block !important;
+    font-size: 10pt;
+    line-height: 1.5;
+    /* سه سطر تنها در بالا یا پایین صفحه نماند */
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* ── سیاه روی سفید ──
+     زمینه‌ها، سایه‌ها و رنگ‌های برند روی کاغذ یا جوهر
+     هدر می‌دهند یا خاکستریِ ناخوانا می‌شوند. جهت و
+     چینشِ RTL دست نمی‌خورد: dir روی <html> است و
+     همهٔ فاصله‌ها منطقی‌اند. */
+  .print-sheet,
+  .print-sheet * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* ── تزئینات ──
+     تیکِ سبزِ «ثبت شد»، و جمله‌ای که می‌گوید این رسید را
+     می‌شود چاپ کرد — روی خودِ کاغذ بی‌معنی‌اند. */
+  .print-sheet .order-done-mark,
+  .print-sheet .receipt-foot {
+    display: none !important;
+  }
+
+  .print-sheet .order-done {
+    text-align: start;
+    padding: 0 0 8px;
+    border-block-end: 1.5px solid #000;
+    margin-block-end: 10px;
+  }
+  .print-sheet .order-done h3 {
+    font-size: 13pt;
+    margin: 0 0 4px;
+  }
+  .print-sheet .order-code {
+    font-size: 12pt;
+    padding: 0;
+    margin: 0;
+    display: inline;
+  }
+  .print-sheet .receipt-date {
+    display: inline;
+    font-size: 9pt;
+    margin-inline-start: 1em;
+  }
+
+  .print-sheet .receipt-sheet {
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* سرصفحه هیچ‌وقت آخرین چیزِ یک صفحه نباشد */
+  .print-sheet .receipt-h {
+    font-size: 11pt;
+    margin: 10px 0 6px;
+    padding-block-end: 3px;
+    border-block-end: 1px solid #000;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .print-sheet .receipt-lines {
+    gap: 7px;
+    margin-block-end: 8px;
+  }
+  /* یک ردیف سفارش — با آسیاب و ترکیب میکسش — یک واحد
+     است و وسطش صفحه عوض نمی‌شود */
+  .print-sheet .receipt-lines > li,
+  .print-sheet .receipt-mix,
+  .print-sheet .receipt-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print-sheet .receipt-lines > li {
+    padding-block-end: 6px;
+    border-block-end: 1px dotted #000;
+  }
+  .print-sheet .receipt-line-meta,
+  .print-sheet .receipt-grind,
+  .print-sheet .receipt-mix,
+  .print-sheet .receipt-block p {
+    font-size: 9pt;
+    margin-block: 2px 0;
+  }
+  .print-sheet .receipt-mix ul {
+    gap: 2px 10px;
+  }
+
+  /* جمع‌ها یک تکه‌اند: «مبلغ قابل پرداخت» نباید تنها
+     سرِ صفحهٔ بعد بیفتد */
+  .print-sheet .totals {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 8px 0;
+    gap: 3px;
+  }
+  .print-sheet .totals div {
+    font-size: 9.5pt;
+  }
+  .print-sheet .row-total {
+    border-block-start: 1.5px solid #000;
+    padding-block-start: 5px;
+  }
+  .print-sheet .row-total dt,
+  .print-sheet .row-total dd {
+    font-size: 12pt;
+  }
+
+  /* راه تماس فروشگاه — همیشه با هم و ترجیحاً روی همان
+     صفحه‌ای که جمع کل هست */
+  .print-sheet .receipt-contact {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-block-start: 10px;
+    padding-block-start: 6px;
+    border-block-start: 1px solid #000;
+  }
+  .print-sheet .receipt-contact-row {
+    border: none;
+    padding: 0;
+    margin: 1px 0;
+    font-size: 9pt;
+  }
+  .print-sheet .receipt-contact-row > span:first-child {
+    font-size: 9pt;
+  }
+  /* لینک روی کاغذ زیرخط نمی‌خواهد؛ نشانی‌اش هم به درد
+     نمی‌خورد، چون رسید شمارهٔ سفارش را دارد */
+  .print-sheet a {
+    text-decoration: none;
+  }
+}
+
+/* ─── پوستهٔ پنل ─── */
+
+.admin-boot {
+  text-align: center;
+  padding-block: 120px;
+  color: var(--soft);
+}
+
+.admin {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.admin-bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  background: var(--espresso);
+  color: var(--paper);
+  border-block-end: 3px solid var(--brass);
+}
+.admin-bar-inner {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.admin-bar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--paper);
+}
+.admin-bar .logo-mark {
+  width: 34px;
+  height: 34px;
+  color: var(--brass);
+}
+.admin-bar .logo-text {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+}
+.admin-bar .logo-text em {
+  font-style: normal;
+  font-size: 0.68rem;
+  color: var(--latte);
+  font-family: var(--font-vazirmatn), sans-serif;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 4px;
+  margin-inline-end: auto;
+}
+.admin-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  color: #c4bcac;
+  transition: all 0.2s var(--ease);
+}
+.admin-link svg {
+  width: 18px;
+  height: 18px;
+}
+.admin-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--paper);
+}
+.admin-link.is-active {
+  background: var(--brass);
+  color: var(--espresso);
+  font-weight: 700;
+}
+
+.admin-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.admin-user {
+  font-size: 0.8rem;
+  color: var(--crema);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.3em 0.9em;
+  border-radius: 100px;
+}
+.admin-ghost {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #c4bcac;
+  border-radius: 100px;
+  padding: 0.4em 1em;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.admin-ghost:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+.admin-bar .btn-burger {
+  display: none;
+}
+.admin-bar .btn-burger span {
+  background: var(--paper);
+}
+
+.admin-main {
+  padding-block: 34px 70px;
+}
+.admin-page {
+  max-width: var(--wrap);
+}
+
+.admin-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block-end: 24px;
+}
+.admin-head h1 {
+  font-size: 2.1rem;
+}
+.admin-sub {
+  color: var(--soft);
+  font-size: 0.86rem;
+  margin: 6px 0 0;
+}
+
+.admin-notice {
+  background: rgba(110, 127, 87, 0.14);
+  color: var(--sage-deep);
+  border-radius: var(--radius-s);
+  padding: 0.6em 1em;
+  font-size: 0.85rem;
+  margin-block-end: 14px;
+}
+
+/* ─── ردیف دوم نوار ابزار: فیلتر دسته ───
+   کنار دکمه‌های «نوع کالا» جا نمی‌شود، پس یک خط کامل
+   زیر آن‌ها می‌نشیند و با یک خط‌چین از هم جدا می‌شوند. */
+
+.toolbar .subfilters {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-block-start: 14px;
+  border-block-start: 1px dashed var(--line);
+}
+.subfilters-label {
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin-inline-end: 2px;
+}
+.chip-sm {
+  font-size: 0.82rem;
+  padding: 0.32em 0.9em;
+}
+
+/* ─── جدول کالاها ─── */
+
+.admin-table {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper-3);
+}
+.admin-row {
+  display: grid;
+  grid-template-columns: 78px 2.1fr 1.1fr 1.1fr 0.9fr 0.9fr 1.5fr;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 16px;
+  border-block-end: 1px solid var(--line);
+}
+.admin-row:last-child {
+  border-block-end: none;
+}
+.admin-row:not(.admin-row-head):hover {
+  background: var(--paper-2);
+}
+.admin-row-head {
+  background: var(--paper-2);
+  font-size: 0.76rem;
+  color: var(--soft);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.admin-row.is-off {
+  opacity: 0.55;
+}
+
+.admin-thumb {
+  width: 70px;
+  height: 52px;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.admin-thumb .card-art {
+  width: 100%;
+  height: 100%;
+}
+
+.admin-name {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.admin-name b {
+  font-size: 0.98rem;
+}
+.admin-name small {
+  font-size: 0.72rem;
+  color: var(--soft);
+  font-family: ui-monospace, monospace;
+}
+.admin-tag {
+  font-style: normal;
+  font-size: 0.68rem;
+  align-self: flex-start;
+  background: var(--brass);
+  color: var(--espresso);
+  border-radius: 100px;
+  padding: 0 0.7em;
+  margin-block-start: 3px;
+}
+
+.admin-cell {
+  font-size: 0.86rem;
+}
+.admin-price {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 0.96rem;
+  white-space: nowrap;
+}
+
+/* موجودی — «نامحدود» کم‌رنگ است چون خبر نیست، نبودِ خبر است */
+.admin-stock {
+  white-space: nowrap;
+}
+.admin-stock.is-free {
+  color: var(--soft);
+}
+.admin-stock.is-out {
+  color: var(--cherry);
+  font-weight: 700;
+}
+
+/* کلید روشن و خاموش */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--soft);
+  padding: 0;
+}
+.switch i {
+  width: 36px;
+  height: 20px;
+  border-radius: 100px;
+  background: var(--line);
+  position: relative;
+  transition: background 0.22s var(--ease);
+  flex: none;
+}
+/* دستگیرهٔ کلید از «ابتدای» نوار شروع می‌کند (در چیدمان راست‌به‌چپ
+   یعنی سمت راست) و با روشن شدن به انتهای آن می‌رود.
+   جابه‌جایی ۱۶ پیکسل است: ۳۶ عرض نوار − ۱۴ قطر دستگیره − ۲×۳ حاشیه. */
+.switch i::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 3px;
+  inset-inline-start: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper-3);
+  transition: transform 0.22s var(--ease);
+}
+.switch.is-on i {
+  background: var(--sage-deep);
+}
+.switch.is-on i::after {
+  transform: translateX(-16px);
+}
+.switch.is-on {
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+.switch:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.admin-actions-head {
+  text-align: end;
+}
+.confirm {
+  display: flex;
+  gap: 6px;
+}
+
+.admin-btn {
+  border: 1.5px solid var(--line);
+  background: var(--paper-3);
+  color: var(--espresso);
+  border-radius: 100px;
+  padding: 0.34em 0.95em;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.admin-btn:hover {
+  border-color: var(--espresso);
+  background: var(--espresso);
+  color: var(--paper);
+}
+.admin-btn.danger {
+  color: var(--cherry);
+  border-color: rgba(178, 58, 43, 0.35);
+}
+.admin-btn.danger:hover {
+  background: var(--cherry);
+  border-color: var(--cherry);
+  color: #fff;
+}
+.admin-btn.is-current {
+  background: var(--espresso);
+  color: var(--paper);
+  border-color: var(--espresso);
+}
+.admin-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ─── فرم کالا ─── */
+
+.form-split {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 26px;
+  align-items: start;
+}
+.form-main {
+  display: grid;
+  gap: 18px;
+}
+
+.form-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-3);
+  padding: 18px 20px 20px;
+  margin: 0;
+}
+.form-card legend {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.15rem;
+  background: var(--espresso);
+  color: var(--paper);
+  border-radius: 100px;
+  padding: 0.15em 1.1em;
+}
+.form-card .field {
+  margin-block-end: 14px;
+}
+.form-card .field:last-child {
+  margin-block-end: 0;
+}
+
+.hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--soft);
+  margin-block-start: 5px;
+  line-height: 1.7;
+}
+.hint-block {
+  margin-block-end: 14px;
+}
+
+.meter-pick {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  margin-block-start: 6px;
+}
+.check-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sage-deep);
+  cursor: pointer;
+}
+
+.upload-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-block-end: 12px;
+}
+.upload-row input[type='file'] {
+  font: inherit;
+  font-size: 0.82rem;
+  flex: 1;
+  min-width: 180px;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius-s);
+  padding: 0.7em;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* پیش‌نمایش زنده */
+.form-preview {
+  position: relative;
+}
+.preview-sticky {
+  position: sticky;
+  inset-block-start: 96px;
+}
+.preview-title {
+  font-size: 1.25rem;
+  margin-block-end: 2px;
+}
+.preview-box {
+  margin-block-start: 14px;
+}
+/* کارت پیش‌نمایش انیمیشن ورود ندارد، پس همیشه دیده می‌شود */
+.preview-box .card {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── سفارش‌ها ─── */
+
+.order-list {
+  display: grid;
+  gap: 12px;
+}
+
+.order-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-3);
+  overflow: hidden;
+  border-inline-start: 4px solid var(--line);
+}
+.order-card.status-new {
+  border-inline-start-color: var(--brass);
+}
+.order-card.status-processing {
+  border-inline-start-color: var(--latte);
+}
+.order-card.status-done {
+  border-inline-start-color: var(--sage-deep);
+}
+.order-card.status-canceled {
+  border-inline-start-color: var(--cherry);
+  opacity: 0.7;
+}
+
+.order-top {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr 1.1fr 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  text-align: start;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 14px 18px;
+}
+.order-top:hover {
+  background: var(--paper-2);
+}
+
+.order-id {
+  display: flex;
+  flex-direction: column;
+}
+.order-id b {
+  font-family: ui-monospace, monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.5px;
+}
+.order-id small,
+.order-who small {
+  font-size: 0.72rem;
+  color: var(--soft);
+}
+.order-who {
+  display: flex;
+  flex-direction: column;
+}
+.order-sum {
+  font-size: 0.84rem;
+  color: var(--soft);
+}
+.order-total {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.05rem;
+  color: var(--cherry);
+  white-space: nowrap;
+}
+
+.order-badge {
+  font-size: 0.72rem;
+  border-radius: 100px;
+  padding: 0.25em 0.9em;
+  white-space: nowrap;
+  background: var(--paper-2);
+  color: var(--soft);
+}
+.order-badge.is-new {
+  background: var(--brass);
+  color: var(--espresso);
+  font-weight: 700;
+}
+.order-badge.is-processing {
+  background: var(--latte);
+  color: var(--espresso);
+}
+.order-badge.is-done {
+  background: rgba(110, 127, 87, 0.22);
+  color: var(--sage-deep);
+}
+.order-badge.is-canceled {
+  background: rgba(178, 58, 43, 0.15);
+  color: var(--cherry);
+}
+.order-caret {
+  font-size: 0.6rem;
+  color: var(--soft);
+}
+
+.order-detail {
+  border-block-start: 1px dashed var(--line);
+  padding: 16px 18px 18px;
+  background: var(--paper);
+}
+.order-cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 26px;
+}
+.order-cols h3 {
+  font-size: 1.1rem;
+  margin-block-end: 10px;
+}
+
+.order-lines {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+}
+.order-lines li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  font-size: 0.86rem;
+  padding-block-end: 7px;
+  border-block-end: 1px dashed var(--line);
+}
+.order-line-qty {
+  color: var(--soft);
+  font-size: 0.8rem;
+}
+.order-line-price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.order-field {
+  font-size: 0.86rem;
+  margin-block-end: 0.5rem;
+}
+.order-field b {
+  color: var(--soft);
+  font-weight: 500;
+  font-size: 0.78rem;
+}
+
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-block-start: 16px;
+  padding-block-start: 14px;
+  border-block-start: 1px solid var(--line);
+}
+.order-actions-label {
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin-inline-end: 4px;
+}
+
+/* ─── انتخاب چندتایی: برچسب طعمی و دانه‌های مجاز ─── */
+
+.tag-pick,
+.pool-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-block-start: 6px;
+}
+.tag-pick .weight-btn,
+.pool-pick .weight-btn {
+  flex: 0 0 auto;
+  padding-inline: 1em;
+}
+.pool-pick {
+  max-height: 210px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+/* ─── ویرایشگر اجزای میکس ─── */
+
+.mix-editor {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper);
+  padding: 10px;
+  margin-block: 8px 12px;
+}
+.mix-editor-head,
+.mix-editor-row {
+  display: grid;
+  grid-template-columns: 1fr 110px auto;
+  gap: 10px;
+  align-items: center;
+}
+.mix-editor-head {
+  font-size: 0.7rem;
+  color: var(--soft);
+  font-weight: 700;
+  padding-inline: 2px;
+  margin-block-end: 6px;
+}
+.mix-editor-row {
+  margin-block-end: 8px;
+}
+.mix-editor-row:last-of-type {
+  margin-block-end: 0;
+}
+.mix-editor-row .input,
+.mix-editor-row .select {
+  padding: 0.42em 0.6em;
+  font-size: 0.84rem;
+}
+.mix-editor-row input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sage-deep);
+  cursor: pointer;
+  justify-self: center;
+}
+.mix-editor-sum {
+  margin: 10px 0 0;
+  padding-block-start: 8px;
+  border-block-start: 1px dashed var(--line);
+  font-size: 0.84rem;
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+.mix-editor-sum.is-off {
+  color: var(--cherry);
+}
+
+/* ─── محتوای سایت ─── */
+
+.content-list {
+  display: grid;
+  gap: 12px;
+}
+.content-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.content-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  padding: 16px 20px;
+}
+.content-head:hover {
+  background: var(--paper-2);
+}
+.content-head b {
+  display: block;
+  font-size: 1.05rem;
+  font-family: var(--font-lalezar), sans-serif;
+  font-weight: 400;
+}
+.content-head em {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin-block-start: 2px;
+}
+.content-toggle {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--paper-2);
+  color: var(--soft);
+  font-size: 1.1rem;
+}
+.content-body {
+  padding: 4px 20px 20px;
+  border-block-start: 1px dashed var(--line);
+}
+
+.list-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper);
+  padding: 12px 14px;
+  margin-block-end: 10px;
+}
+.list-item-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-block-end: 10px;
+  padding-block-end: 8px;
+  border-block-end: 1px dashed var(--line);
+}
+.list-item-bar b {
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+.list-item-tools {
+  display: flex;
+  gap: 5px;
+}
+.list-item-tools .admin-btn {
+  padding-inline: 0.7em;
+}
+
+.save-ok {
+  font-size: 0.82rem;
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+
+/* ─── باشگاه مشتریان ─── */
+
+.count-pill {
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--brass);
+  color: var(--espresso);
+  border-radius: 100px;
+  padding: 0.1em 0.8em;
+  vertical-align: middle;
+  margin-inline-start: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.club-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-3);
+  min-width: 720px;
+}
+.club-table th,
+.club-table td {
+  padding: 11px 14px;
+  text-align: start;
+  font-size: 0.86rem;
+  border-block-end: 1px solid var(--line);
+  white-space: nowrap;
+}
+.club-table th {
+  background: var(--paper-2);
+  font-size: 0.74rem;
+  color: var(--soft);
+  font-weight: 700;
+}
+.club-table tr:last-child td {
+  border-block-end: none;
+}
+.club-table tbody tr:hover {
+  background: var(--paper-2);
+}
+.cell-ltr {
+  font-family: ui-monospace, monospace;
+}
+.cell-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+/* ─── گزارش‌ها ─── */
+
+.mono {
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.4px;
+}
+
+.range-pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--soft);
+}
+.range-pick .select {
+  padding: 0.4em 1em;
+  font-size: 0.84rem;
+}
+
+/* کارت‌های خلاصه */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-block-end: 26px;
+}
+.kpi {
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.kpi.is-strong {
+  background: var(--espresso);
+  border-color: var(--espresso);
+}
+.kpi-label {
+  font-size: 0.76rem;
+  color: var(--soft);
+}
+.kpi.is-strong .kpi-label {
+  color: var(--latte);
+}
+.kpi-value {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: var(--espresso);
+  overflow-wrap: anywhere;
+}
+.kpi.is-strong .kpi-value {
+  color: var(--brass);
+}
+.kpi-hint {
+  font-size: 0.72rem;
+  color: var(--soft);
+}
+
+.report-block {
+  margin-block-end: 34px;
+}
+.report-h {
+  font-size: 1.3rem;
+  margin-block-end: 12px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.report-h small {
+  font-size: 0.78rem;
+  color: var(--soft);
+  font-family: var(--font-vazirmatn), sans-serif;
+  font-weight: 400;
+}
+
+/* جدول بازه‌ها و جدول سفارش‌ها */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-3);
+  min-width: 640px;
+}
+.report-table th,
+.report-table td {
+  padding: 10px 14px;
+  text-align: start;
+  font-size: 0.86rem;
+  border-block-end: 1px solid var(--line);
+  white-space: nowrap;
+}
+.report-table th {
+  background: var(--paper-2);
+  font-size: 0.74rem;
+  color: var(--soft);
+  font-weight: 700;
+}
+.report-table tr:last-child td {
+  border-block-end: none;
+}
+
+.report-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.report-row:hover {
+  background: var(--paper-2);
+}
+.report-row:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: -2px;
+}
+.report-row.is-active {
+  background: rgba(200, 150, 60, 0.16);
+  box-shadow: inset 3px 0 0 var(--brass);
+}
+.report-row.is-empty {
+  color: var(--soft);
+}
+
+.col-label {
+  font-weight: 700;
+}
+.col-money {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 0.98rem;
+  color: var(--cherry);
+}
+.report-row.is-empty .col-money {
+  color: var(--soft);
+  font-family: inherit;
+  font-size: 0.86rem;
+}
+.col-items {
+  color: var(--soft);
+  font-size: 0.8rem;
+}
+.row-canceled {
+  font-style: normal;
+  font-size: 0.68rem;
+  margin-inline-start: 8px;
+  background: rgba(178, 58, 43, 0.14);
+  color: var(--cherry);
+  border-radius: 100px;
+  padding: 0.1em 0.6em;
+}
+
+.col-bar {
+  inline-size: 26%;
+  min-inline-size: 110px;
+}
+.bar {
+  display: block;
+  block-size: 8px;
+  background: var(--paper-2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  block-size: 100%;
+  min-inline-size: 2px;
+  background: linear-gradient(to left, var(--brass), var(--latte));
+  border-radius: 100px;
+}
+
+/* پرفروش‌های بازه */
+.top-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-block: 12px;
+}
+.top-items-label {
+  font-size: 0.78rem;
+  color: var(--soft);
+}
+.top-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--paper-2);
+  border-radius: 100px;
+  padding: 0.28em 0.5em 0.28em 0.9em;
+  font-size: 0.78rem;
+}
+.top-chip b {
+  background: var(--paper-3);
+  border-radius: 100px;
+  padding: 0.1em 0.7em;
+  font-size: 0.72rem;
+  color: var(--cherry);
+}
+
+/* پشتیبان و خروجی */
+.backup-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--paper-2);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-block: 14px;
+}
+.backup-text {
+  max-width: 60ch;
+}
+.backup-text b {
+  font-size: 0.95rem;
+}
+.backup-text p {
+  font-size: 0.78rem;
+  color: var(--soft);
+  margin: 4px 0 0;
+  line-height: 1.8;
+}
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.admin-btn.primary {
+  background: var(--espresso);
+  color: var(--paper);
+  border-color: var(--espresso);
+}
+.admin-btn.primary:hover {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--espresso);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-block-start: 16px;
+}
+.pager-info {
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+
+/* ─── پنجرهٔ جزئیات سفارش ─── */
+
+.modal-back {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(30, 20, 12, 0.62);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(2px);
+}
+.modal-card {
+  inline-size: min(880px, 100%);
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--paper-2);
+  border-block-end: 1px solid var(--line);
+}
+.modal-head > div:first-child {
+  margin-inline-end: auto;
+}
+.modal-head h2 {
+  font-size: 1.5rem;
+  margin: 2px 0;
+}
+.modal-head .admin-sub {
+  margin: 0;
+}
+.modal-x {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--soft);
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex: none;
+}
+.modal-x:hover {
+  border-color: var(--cherry);
+  color: var(--cherry);
+}
+.modal-body {
+  padding: 20px 22px 22px;
+}
+.modal-body h3 {
+  font-size: 1.05rem;
+  margin-block-end: 10px;
+}
+.modal-body h3.mt {
+  margin-block-start: 20px;
+}
+
+.order-lines.detail li {
+  grid-template-columns: 1fr auto auto;
+  align-items: start;
+  gap: 14px;
+  padding-block-end: 10px;
+}
+.line-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.line-main small {
+  font-size: 0.68rem;
+  color: var(--soft);
+}
+.line-tag {
+  font-style: normal;
+  font-size: 0.7rem;
+  align-self: flex-start;
+  border-radius: 100px;
+  padding: 0.1em 0.7em;
+  margin-block-start: 2px;
+  background: var(--paper-2);
+  color: var(--soft);
+}
+
+/* ترکیب میکس — نام دانه، درصد و وزنی که باید توزین شود */
+.mix-box {
+  display: block;
+  margin-block-start: 7px;
+  padding: 8px 10px;
+  background: rgba(110, 127, 87, 0.1);
+  border: 1px solid rgba(110, 127, 87, 0.28);
+  border-radius: var(--radius-s);
+}
+.mix-title {
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--sage-deep);
+  display: block;
+  margin-block-end: 5px;
+}
+.mix-list {
+  display: grid;
+  gap: 3px;
+}
+.mix-part {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.78rem;
+}
+.mix-name {
+  overflow-wrap: anywhere;
+}
+.mix-pct {
+  font-family: var(--font-lalezar), sans-serif;
+  color: var(--sage-deep);
+  font-size: 0.88rem;
+  min-inline-size: 3.2em;
+  text-align: end;
+}
+.mix-grams {
+  font-size: 0.7rem;
+  color: var(--soft);
+  min-inline-size: 5.5em;
+  text-align: end;
+}
+.order-lines.detail .order-line-qty {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+.order-lines.detail .order-line-qty small {
+  font-size: 0.68rem;
+  opacity: 0.8;
+}
+
+/* ─── تنظیمات ─── */
+.settings-form {
+  max-width: 520px;
+}
+
+/* ─── صفحهٔ ورود ─── */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(1000px 500px at 80% -10%, rgba(200, 150, 60, 0.16), transparent 60%),
+    var(--espresso);
+}
+.login-card {
+  width: min(420px, 100%);
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 32px 30px;
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.7);
+}
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-end: 22px;
+}
+.login-brand .logo-mark {
+  width: 38px;
+  height: 38px;
+  color: var(--brass);
+}
+.login-brand .logo-text {
+  font-family: var(--font-lalezar), sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+}
+.login-brand .logo-text em {
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--soft);
+  font-family: var(--font-vazirmatn), sans-serif;
+}
+.login-card h1 {
+  font-size: 1.7rem;
+  margin-block-end: 4px;
+}
+.login-note {
+  font-size: 0.84rem;
+  color: var(--soft);
+  margin-block-end: 20px;
+}
+.login-card .field {
+  margin-block-end: 14px;
+}
+.login-back {
+  display: block;
+  text-align: center;
+  margin-block-start: 18px;
+  font-size: 0.8rem;
+  color: var(--soft);
+}
+.login-back:hover {
+  color: var(--cherry);
+}
+
+/* ─── واکنش‌گرایی پنل ─── */
+
+@media (max-width: 1080px) {
+  .form-split {
+    grid-template-columns: 1fr;
+  }
+  .preview-sticky {
+    position: static;
+  }
+  .preview-box {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-row {
+    grid-template-columns: 64px 1.8fr 1fr 1fr;
+  }
+  .admin-row > :nth-child(5),
+  .admin-row > :nth-child(6),
+  .admin-row > :nth-child(7) {
+    grid-column: 1 / -1;
+  }
+  .admin-row-head {
+    display: none;
+  }
+  .admin-actions {
+    justify-content: flex-start;
+  }
+
+  .order-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .order-cols {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* ویرایشگر میکس روی موبایل ستونی می‌شود */
+  .mix-editor-head {
+    display: none;
+  }
+  .mix-editor-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .mix-editor-row > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .admin-bar-inner {
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+  }
+  .admin-bar .btn-burger {
+    display: block;
+  }
+  .admin-nav {
+    order: 3;
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s var(--ease);
+  }
+  .admin-nav.is-open {
+    max-height: 400px;
+  }
+  .admin-link {
+    border-radius: var(--radius-s);
+  }
+  .admin-user {
+    display: none;
+  }
+  .admin-head h1 {
+    font-size: 1.7rem;
+  }
+
+  .kpi-row {
+    grid-template-columns: 1fr;
+  }
+  .kpi-value {
+    font-size: 1.3rem;
+  }
+  .backup-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .backup-actions .admin-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  /* پنجرهٔ جزئیات روی موبایل تمام‌عرض می‌شود */
+  .modal-back {
+    padding: 0;
+  }
+  .modal-card {
+    inline-size: 100%;
+    min-block-size: 100vh;
+    border-radius: 0;
+  }
+  .order-lines.detail li {
+    grid-template-columns: 1fr auto;
+  }
+  .order-lines.detail .order-line-price {
+    grid-column: 2;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "ghahve",
+  "version": "1.0.0",
+  "private": true,
+  "description": "فروشگاه رُست‌خانهٔ دانه — Next.js + Express + MongoDB با پنل مدیریت",
+  "workspaces": [
+    "shared",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "setup": "npm install && npm run seed",
+    "setup:ci": "npm ci",
+    "seed": "npm run seed -w server",
+    "seed:reset": "npm run seed:reset -w server",
+    "dev": "concurrently -n \"api,web\" -c \"yellow,magenta\" \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w server",
+    "dev:web": "npm run dev -w ghahve-web",
+    "build": "npm run build -w ghahve-web",
+    "start": "concurrently -n \"api,web\" -c \"yellow,magenta\" \"npm:start:server\" \"npm:start:web\"",
+    "start:server": "npm start -w server",
+    "start:web": "npm start -w ghahve-web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "docs:build": "node scripts/docs/build.mjs",
+    "docs:render": "node scripts/docs/render.mjs",
+    "docs:check": "node scripts/docs/check-svg.mjs",
+    "docs:pdf": "npm run docs:build && npm run docs:check && npm run docs:render",
+    "og:image": "node scripts/og-image.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "concurrently": "^9.0.1",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.10.0",
+    "jsdom": "^29.1.1",
+    "marked": "18.0.9",
+    "pdfjs-dist": "6.2.108",
+    "playwright": "1.62.1",
+    "prettier": "3.9.6",
+    "vitest": "4.1.10"
+  }
+}

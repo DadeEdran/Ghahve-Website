@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="نمای داخل کافه در نور صبح">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A2C1E"/>
+      <stop offset=".55" stop-color="#241A11"/>
+      <stop offset="1" stop-color="#15100A"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBEDD0"/>
+      <stop offset=".5" stop-color="#EEC585"/>
+      <stop offset="1" stop-color="#CE9155"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6B4A2F"/>
+      <stop offset="1" stop-color="#33210F"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9E7635"/>
+      <stop offset=".38" stop-color="#EBD6A6"/>
+      <stop offset=".62" stop-color="#C8963C"/>
+      <stop offset="1" stop-color="#8A6529"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="1" y1="0" x2=".1" y2="1">
+      <stop offset="0" stop-color="#FFD79A" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#FFD79A" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx=".5" cy=".2" r=".8">
+      <stop offset="0" stop-color="#FFD79A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFD79A" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="winClip">
+      <path d="M700 560V250a170 170 0 0 1 340 0v310Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- دیوار -->
+  <rect width="1200" height="800" fill="url(#wall)"/>
+  <g stroke="#0E0A06" stroke-opacity=".35" stroke-width="2">
+    <path d="M0 118h1200M0 236h1200M0 354h1200"/>
+  </g>
+
+  <!-- پنجرهٔ قوسی -->
+  <path d="M700 560V250a170 170 0 0 1 340 0v310Z" fill="url(#sky)"/>
+  <g clip-path="url(#winClip)">
+    <circle cx="955" cy="205" r="44" fill="#FFF6E0" opacity=".92"/>
+    <circle cx="955" cy="205" r="80" fill="#FFF6E0" opacity=".18"/>
+    <g fill="#9A6634" opacity=".45">
+      <rect x="690" y="372" width="66" height="120"/>
+      <rect x="770" y="404" width="48" height="88"/>
+      <rect x="960" y="388" width="90" height="104"/>
+    </g>
+    <g fill="#6E7F57" opacity=".7">
+      <circle cx="880" cy="410" r="44"/>
+      <circle cx="846" cy="438" r="26"/>
+      <rect x="874" y="430" width="10" height="72"/>
+    </g>
+    <rect x="690" y="492" width="370" height="70" fill="#B8814C" opacity=".55"/>
+  </g>
+  <path d="M700 560V250a170 170 0 0 1 340 0v310Z" fill="none" stroke="#C8963C" stroke-width="9" stroke-opacity=".85"/>
+  <g stroke="#C8963C" stroke-width="5" stroke-opacity=".6" fill="none">
+    <path d="M870 82v478"/>
+    <path d="M700 330h340"/>
+  </g>
+
+  <!-- نور صبح روی کف -->
+  <path d="M700 150 1040 240 560 800 60 800Z" fill="url(#beam)"/>
+  <path d="M880 110 1040 330 700 800 430 800Z" fill="url(#beam)" opacity=".7"/>
+
+  <!-- چراغ‌های آویز -->
+  <g>
+    <g transform="translate(215 0)">
+      <path d="M0 0v168" stroke="#C8963C" stroke-width="3" stroke-opacity=".7"/>
+      <path d="M-46 232 0 168 46 232Z" fill="url(#steel)"/>
+      <ellipse cy="232" rx="46" ry="9" fill="#FFE7B8"/>
+      <ellipse cy="300" rx="96" ry="120" fill="url(#lamp)"/>
+    </g>
+    <g transform="translate(395 0)">
+      <path d="M0 0v122" stroke="#C8963C" stroke-width="3" stroke-opacity=".7"/>
+      <path d="M-40 178 0 122 40 178Z" fill="url(#steel)"/>
+      <ellipse cy="178" rx="40" ry="8" fill="#FFE7B8"/>
+      <ellipse cy="244" rx="86" ry="110" fill="url(#lamp)"/>
+    </g>
+    <g transform="translate(568 0)">
+      <path d="M0 0v196" stroke="#C8963C" stroke-width="3" stroke-opacity=".7"/>
+      <path d="M-36 246 0 196 36 246Z" fill="url(#steel)"/>
+      <ellipse cy="246" rx="36" ry="7" fill="#FFE7B8"/>
+      <ellipse cy="308" rx="78" ry="100" fill="url(#lamp)"/>
+    </g>
+  </g>
+
+  <!-- قفسهٔ پشت بار -->
+  <g>
+    <rect x="40" y="352" width="580" height="13" rx="5" fill="url(#wood)"/>
+    <g>
+      <rect x="78" y="298" width="46" height="54" rx="6" fill="#C8963C" opacity=".85"/>
+      <rect x="78" y="298" width="46" height="12" rx="5" fill="#EBD6A6"/>
+      <rect x="140" y="286" width="40" height="66" rx="6" fill="#A9B78C" opacity=".8"/>
+      <rect x="140" y="286" width="40" height="11" rx="5" fill="#D6E0BE"/>
+      <path d="M204 352v-52c0-16 12-24 26-24s26 8 26 24v52Z" fill="#B23A2B" opacity=".8"/>
+      <rect x="278" y="292" width="44" height="60" rx="6" fill="#8A6529" opacity=".8"/>
+      <rect x="344" y="306" width="36" height="46" rx="5" fill="#C8963C" opacity=".55"/>
+      <path d="M410 352v-46c0-14 10-22 24-22s24 8 24 22v46Z" fill="#A9B78C" opacity=".55"/>
+      <rect x="486" y="300" width="50" height="52" rx="6" fill="#6B4A2F"/>
+      <rect x="486" y="300" width="50" height="11" rx="5" fill="#9E7635"/>
+    </g>
+    <!-- تابلوی منو -->
+    <rect x="356" y="120" width="238" height="150" rx="10" fill="#15100A" stroke="#C8963C" stroke-width="3" stroke-opacity=".7"/>
+    <g stroke="#EBD6A6" stroke-opacity=".55" stroke-width="6" stroke-linecap="round">
+      <path d="M386 162h118M386 190h176M386 218h96M386 244h148"/>
+    </g>
+  </g>
+
+  <!-- پیشخوان -->
+  <rect x="-10" y="560" width="720" height="32" rx="8" fill="#7A5433"/>
+  <rect x="-10" y="588" width="720" height="212" fill="url(#wood)"/>
+  <g stroke="#15100A" stroke-opacity=".3" stroke-width="3">
+    <path d="M150 588v212M330 588v212M510 588v212"/>
+  </g>
+
+  <!-- دستگاه اسپرسو -->
+  <g>
+    <rect x="176" y="404" width="292" height="156" rx="14" fill="url(#steel)"/>
+    <rect x="176" y="404" width="292" height="34" rx="14" fill="#EBD6A6" opacity=".7"/>
+    <rect x="196" y="450" width="252" height="60" rx="8" fill="#2B1F14"/>
+    <g fill="#EBD6A6" opacity=".85">
+      <circle cx="252" cy="480" r="11"/><circle cx="322" cy="480" r="11"/><circle cx="392" cy="480" r="11"/>
+    </g>
+    <g fill="#8A6529">
+      <rect x="228" y="510" width="48" height="14" rx="4"/><rect x="298" y="510" width="48" height="14" rx="4"/>
+      <rect x="200" y="512" width="34" height="9" rx="4"/><rect x="270" y="512" width="34" height="9" rx="4"/>
+    </g>
+    <g fill="#F0E6D6">
+      <rect x="232" y="530" width="40" height="26" rx="5"/><rect x="302" y="530" width="40" height="26" rx="5"/>
+    </g>
+    <!-- فنجان‌های روی دستگاه -->
+    <g fill="#F0E6D6">
+      <rect x="206" y="386" width="30" height="18" rx="4"/><rect x="244" y="386" width="30" height="18" rx="4"/>
+      <rect x="282" y="386" width="30" height="18" rx="4"/><rect x="225" y="368" width="30" height="18" rx="4"/>
+      <rect x="263" y="368" width="30" height="18" rx="4"/>
+    </g>
+    <!-- لولهٔ بخار -->
+    <path d="M468 452c22 0 26 14 26 30v56" stroke="#C8963C" stroke-width="7" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- آسیاب -->
+  <g>
+    <path d="M508 448h56l-8 40h-40Z" fill="#8A6529"/>
+    <rect x="504" y="488" width="64" height="72" rx="8" fill="url(#steel)"/>
+    <rect x="518" y="520" width="36" height="30" rx="5" fill="#2B1F14"/>
+    <circle cx="536" cy="440" r="18" fill="#3A2C1E" opacity=".8"/>
+  </g>
+
+  <!-- گلدان -->
+  <g transform="translate(628 470)">
+    <g fill="#6E7F57">
+      <path d="M0 90c-6-40-30-56-46-62 20-6 42 4 50 30 6-30 26-44 48-40-14 10-30 30-32 72Z"/>
+      <path d="M6 90c4-30 22-44 40-48-14 12-24 26-26 48Z" opacity=".75"/>
+    </g>
+    <path d="M-30 88h64l-8 44h-48Z" fill="#B23A2B"/>
+    <rect x="-34" y="82" width="72" height="12" rx="4" fill="#8E2A1E"/>
+  </g>
+
+  <!-- فنجان روی پیشخوان + بخار -->
+  <g transform="translate(618 512)">
+    <path d="M-24 0h48v22a16 16 0 0 1-16 16h-16A16 16 0 0 1-24 22Z" fill="#F0E6D6"/>
+    <path d="M24 6c14 0 14 20 0 20" stroke="#F0E6D6" stroke-width="5" fill="none"/>
+    <ellipse cy="0" rx="24" ry="6" fill="#6B4423"/>
+    <ellipse cx="-30" cy="42" rx="34" ry="6" fill="#F0E6D6" opacity=".9"/>
+  </g>
+  <g stroke="#FFE7B8" stroke-opacity=".35" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M604 496c-10-14 10-22 0-38s8-22 2-34"/>
+    <path d="M630 492c-9-12 9-20 0-34s7-20 2-30"/>
+  </g>
+
+  <!-- چهارپایه‌ها -->
+  <g fill="#4A3524">
+    <g transform="translate(830 640)">
+      <rect x="-42" y="0" width="84" height="16" rx="8" fill="#6B4A2F"/>
+      <path d="M-30 16 -38 160M30 16 38 160M-30 90h60" stroke="#4A3524" stroke-width="9" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(1010 668)">
+      <rect x="-38" y="0" width="76" height="15" rx="7" fill="#6B4A2F"/>
+      <path d="M-26 15 -34 132M26 15 34 132M-27 80h54" stroke="#4A3524" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- کف -->
+  <rect y="770" width="1200" height="30" fill="#120D08" opacity=".6"/>
+</svg>

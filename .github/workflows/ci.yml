@@ -1,0 +1,57 @@
+# ══════════════════════════════════════════════════
+# بررسی خودکار هر push و هر pull request.
+#
+# چهار گام، به همان ترتیبی که یک نفر روی ماشین خودش
+# انجام می‌دهد: نصب، linter، تست، ساخت.
+#
+# اینجا استقرار نمی‌کنیم — CI فقط می‌گوید کد سالم است.
+#
+# پایگاه داده لازم نیست: تست‌ها روی توابع خالص‌اند
+# (قیمت، میکس، تقویم شمسی) و به مونگو دست نمی‌زنند.
+# دو تست کامپوننتی هم داخل jsdom اجرا می‌شوند، نه مرورگر
+# واقعی.
+#
+# ── یک نکته دربارهٔ گام ساخت ──
+# `npm run build` خروجی Next را می‌سازد، و next/font
+# فایل فونت‌ها را **موقع build** از گوگل‌فونتس می‌گیرد تا
+# روی دامنهٔ خودمان میزبانی شوند (مورد ۲۵). پس این گام به
+# شبکه نیاز دارد؛ روی رانرهای گیت‌هاب مشکلی نیست، ولی در
+# یک CI بی‌اینترنت باید فونت‌ها را محلی نگه داشت.
+# ══════════════════════════════════════════════════
+
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          # با npm workspaces فقط یک package-lock داریم، در ریشه
+          cache-dependency-path: package-lock.json
+
+      # یک نصب برای هر سه workspace: shared، server، web
+      - name: نصب وابستگی‌ها
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: قالب‌بندی (Prettier)
+        run: npm run format:check
+
+      - name: تست‌ها
+        run: npm test
+
+      - name: ساخت خروجی وب (Next)
+        run: npm run build

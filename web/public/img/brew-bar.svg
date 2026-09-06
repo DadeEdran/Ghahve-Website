@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="میز دم‌آوری با کتری گردن‌غازی و وی۶۰">
+  <defs>
+    <linearGradient id="bBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2318"/>
+      <stop offset="1" stop-color="#16100A"/>
+    </linearGradient>
+    <linearGradient id="bMetal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7A5A24"/>
+      <stop offset=".38" stop-color="#EBD6A6"/>
+      <stop offset=".7" stop-color="#C8963C"/>
+      <stop offset="1" stop-color="#6E4E1E"/>
+    </linearGradient>
+    <linearGradient id="bBrew" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A9713C"/>
+      <stop offset="1" stop-color="#5E3A1C"/>
+    </linearGradient>
+    <radialGradient id="bGlow" cx=".5" cy=".3" r=".7">
+      <stop offset="0" stop-color="#FFD79A" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#FFD79A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bBg)"/>
+  <rect width="800" height="600" fill="url(#bGlow)"/>
+  <!-- کاشی پس‌زمینه -->
+  <g stroke="#C8963C" stroke-opacity=".12" stroke-width="3">
+    <path d="M0 80h800M0 190h800M0 300h800"/>
+    <path d="M120 0v300M280 0v300M440 0v300M600 0v300M740 0v300"/>
+  </g>
+
+  <!-- میز چوبی -->
+  <rect y="430" width="800" height="26" rx="6" fill="#7A5433"/>
+  <rect y="456" width="800" height="144" fill="#3E2A18"/>
+  <g stroke="#241708" stroke-opacity=".5" stroke-width="3">
+    <path d="M170 456v144M420 456v144M640 456v144"/>
+  </g>
+
+  <!-- ترازوی دیجیتال -->
+  <g transform="translate(614 400)">
+    <rect x="-86" y="0" width="172" height="30" rx="10" fill="#1B1209" stroke="url(#bMetal)" stroke-width="3"/>
+    <rect x="-52" y="8" width="70" height="15" rx="4" fill="#A9B78C" opacity=".85"/>
+    <circle cx="52" cy="15" r="7" fill="#B23A2B"/>
+  </g>
+
+  <!-- سرور شیشه‌ای + وی۶۰ -->
+  <g transform="translate(392 236)">
+    <!-- سرور -->
+    <path d="M-72 108c0 62 8 84 12 86h120c4-2 12-24 12-86Z" fill="#EBD6A6" opacity=".18"/>
+    <path d="M-72 108c0 62 8 84 12 86h120c4-2 12-24 12-86Z" fill="none" stroke="#EBD6A6" stroke-width="4" stroke-opacity=".8"/>
+    <path d="M-62 152c0 34 6 42 8 42h108c2 0 8-8 8-42Z" fill="url(#bBrew)"/>
+    <ellipse cy="108" rx="72" ry="12" fill="#EBD6A6" opacity=".3"/>
+    <path d="M72 122c26 6 26 44 0 50" stroke="#EBD6A6" stroke-width="8" fill="none" stroke-opacity=".7" stroke-linecap="round"/>
+    <!-- دریپر -->
+    <path d="M-92 0 0 106 92 0Z" fill="#F1E6D0"/>
+    <path d="M-92 0 0 106 92 0Z" fill="none" stroke="#D6C6AC" stroke-width="4"/>
+    <ellipse cy="0" rx="92" ry="18" fill="#F7F1E4"/>
+    <ellipse cy="0" rx="76" ry="13" fill="#8B5A2E"/>
+    <ellipse cy="-2" rx="62" ry="10" fill="#A9713C"/>
+    <g stroke="#D6C6AC" stroke-width="3" opacity=".9">
+      <path d="M-62 14 -6 90M-30 22 -4 96M30 22 4 96M62 14 6 90"/>
+    </g>
+    <!-- چکه -->
+    <g fill="#A9713C">
+      <ellipse cy="126" rx="4" ry="8"/><ellipse cy="152" rx="3" ry="6" opacity=".7"/>
+    </g>
+  </g>
+
+  <!-- کتری گردن‌غازی -->
+  <g transform="translate(150 300)">
+    <path d="M-70 6c0-42 32-72 70-72s70 30 70 72c0 40-30 66-70 66s-70-26-70-66Z" fill="url(#bMetal)"/>
+    <ellipse cy="-66" rx="34" ry="10" fill="#EBD6A6"/>
+    <rect x="-16" y="-84" width="32" height="16" rx="7" fill="#2E2318"/>
+    <!-- لوله گردن‌غازی -->
+    <path d="M62 -30c56 -14 82 22 78 62 -2 22-14 34-24 40" stroke="url(#bMetal)" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <!-- دسته -->
+    <path d="M-66 -26c-40 4-46 46-16 74" stroke="#2E2318" stroke-width="15" fill="none" stroke-linecap="round"/>
+    <ellipse cx="-24" cy="-16" rx="20" ry="12" fill="#FFF6E0" opacity=".28"/>
+  </g>
+  <!-- جریان آب -->
+  <path d="M270 118c0 44-2 68 0 96" stroke="#DCE7F0" stroke-width="5" stroke-opacity=".55" fill="none" stroke-linecap="round"/>
+
+  <!-- بخار -->
+  <g stroke="#FFE7B8" stroke-opacity=".26" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M392 196c-12-16 12-26 0-44s10-26 2-40"/>
+    <path d="M430 202c-10-14 10-22 0-38s8-22 2-32"/>
+    <path d="M150 210c-11-14 11-24 0-40s9-24 2-34"/>
+  </g>
+
+  <!-- فنجان‌ها روی میز -->
+  <g transform="translate(690 404)">
+    <path d="M-30 0h60v26a18 18 0 0 1-18 18h-24A18 18 0 0 1-30 26Z" fill="#F1E6D0"/>
+    <path d="M30 6c16 0 16 22 0 22" stroke="#F1E6D0" stroke-width="6" fill="none"/>
+    <ellipse rx="30" ry="7" fill="#6B4423"/>
+  </g>
+  <g transform="translate(84 412)">
+    <path d="M-26 0h52v22a16 16 0 0 1-16 16h-20A16 16 0 0 1-26 22Z" fill="#F1E6D0"/>
+    <ellipse rx="26" ry="6" fill="#8B5A2E"/>
+  </g>
+
+  <!-- دانه‌های روی میز -->
+  <g fill="#2E1B0C">
+    <g transform="translate(506 424) rotate(-20)"><ellipse rx="16" ry="11"/><path d="M-12 0c5-5 5 5 12-5" stroke="#7A4E22" stroke-width="2.5" fill="none"/></g>
+    <g transform="translate(540 436) rotate(26)"><ellipse rx="15" ry="10"/><path d="M-11 0c4-5 4 5 11-5" stroke="#7A4E22" stroke-width="2.5" fill="none"/></g>
+  </g>
+</svg>

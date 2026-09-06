@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="قیف وی۶۰ و سرور">
+  <defs>
+    <linearGradient id="v60Brew" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B4834C"/>
+      <stop offset="1" stop-color="#6B4423"/>
+    </linearGradient>
+  </defs>
+  <circle cx="120" cy="120" r="112" fill="#EFE4D2"/>
+  <circle cx="120" cy="120" r="112" fill="none" stroke="#D6C6AC" stroke-width="3"/>
+
+  <!-- سرور -->
+  <path d="M74 138c0 46 6 62 9 64h74c3-2 9-18 9-64Z" fill="#FBF6EA"/>
+  <path d="M80 168c0 24 4 32 6 34h68c2-2 6-10 6-34Z" fill="url(#v60Brew)"/>
+  <path d="M74 138c0 46 6 62 9 64h74c3-2 9-18 9-64Z" fill="none" stroke="#8A6529" stroke-width="4"/>
+  <path d="M166 148c18 4 18 30 0 34" stroke="#8A6529" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="120" cy="138" rx="46" ry="8" fill="#E5D7BF" stroke="#8A6529" stroke-width="3"/>
+
+  <!-- دریپر -->
+  <path d="M56 68 120 136 184 68Z" fill="#FBF6EA" stroke="#8A6529" stroke-width="4" stroke-linejoin="round"/>
+  <ellipse cx="120" cy="68" rx="64" ry="13" fill="#F7F1E4" stroke="#8A6529" stroke-width="4"/>
+  <ellipse cx="120" cy="68" rx="50" ry="9" fill="#8B5A2E"/>
+  <ellipse cx="120" cy="66" rx="40" ry="7" fill="#A9713C"/>
+  <g stroke="#D6C6AC" stroke-width="3">
+    <path d="M78 84 114 124M100 90 118 130M140 90 122 130M162 84 126 124"/>
+  </g>
+
+  <!-- چکه -->
+  <g fill="#A9713C">
+    <ellipse cx="120" cy="152" rx="4" ry="7"/>
+  </g>
+
+  <!-- بخار -->
+  <g stroke="#8A6529" stroke-opacity=".5" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M104 46c-8-10 8-16 0-26"/>
+    <path d="M132 42c-7-9 7-15 0-24"/>
+  </g>
+</svg>
